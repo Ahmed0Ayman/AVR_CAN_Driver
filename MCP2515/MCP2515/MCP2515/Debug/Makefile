@@ -37,6 +37,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../HAL_EXIT.c \
 ../HAL_GPIO.c \
 ../HAL_SPI.c \
 ../Lcd-Driver.c \
@@ -51,6 +52,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+HAL_EXIT.o \
 HAL_GPIO.o \
 HAL_SPI.o \
 Lcd-Driver.o \
@@ -58,6 +60,7 @@ main.o \
 MCP2515.o
 
 OBJS_AS_ARGS +=  \
+HAL_EXIT.o \
 HAL_GPIO.o \
 HAL_SPI.o \
 Lcd-Driver.o \
@@ -65,6 +68,7 @@ main.o \
 MCP2515.o
 
 C_DEPS +=  \
+HAL_EXIT.d \
 HAL_GPIO.d \
 HAL_SPI.d \
 Lcd-Driver.d \
@@ -72,6 +76,7 @@ main.d \
 MCP2515.d
 
 C_DEPS_AS_ARGS +=  \
+HAL_EXIT.d \
 HAL_GPIO.d \
 HAL_SPI.d \
 Lcd-Driver.d \
@@ -92,6 +97,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+./HAL_EXIT.o: .././HAL_EXIT.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./HAL_GPIO.o: .././HAL_GPIO.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0

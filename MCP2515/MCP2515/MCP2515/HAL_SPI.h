@@ -12,6 +12,7 @@
 #include "HAL_GPIO.h"
 #include <string.h>
 #include <avr/interrupt.h>
+#include "HAL_EXIT.h"
 
 typedef struct 
 {

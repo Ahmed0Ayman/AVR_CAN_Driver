@@ -13,7 +13,38 @@
 #define F_CPU 16000000
 #include "MCP2515_REG.h"
 #include <util/delay.h>
+#include <stdbool.h>
+#include "HAL_EXIT.h"
 #include "HAL_SPI.h"
+
+#define PRIVATE static
+#define PUBLIC 
+
+
+typedef enum
+{
+	CAN_OK ,
+	CAN_ERROR
+}CANStatus;
+
+typedef struct
+{
+	uint8_t LEN_Field : 4 ;
+	uint8_t EXT_Field : 1 ;
+	uint8_t RTR_Field : 1 ;
+	
+}CANControlField;
+
+typedef struct
+{
+	uint32_t ID ;
+	CANControlField CANControl;
+	uint8_t MesgData[8];
+	CANStatus status ;
+	
+}CANMesg_t;
+
+
 
 
 
@@ -40,7 +71,7 @@ uint8_t MCP2515_Read_Register(uint8_t AddREG);
  * param : value the value that you need to write to the register 
  * return : void 
  */
-void MCP2515_Write_Register(uint8_t AddREG,uint8_t value);
+PUBLIC void MCP2515_Write_Register(uint8_t AddREG,uint8_t value);
 
 
 
@@ -49,7 +80,7 @@ void MCP2515_Write_Register(uint8_t AddREG,uint8_t value);
  * param : void 
  * return : void  
  */
-void MCP2515_Rest(void);
+PUBLIC void MCP2515_Rest(void);
 
 
 
@@ -60,7 +91,7 @@ void MCP2515_Rest(void);
  * param : rCNF3 CAN interface register 3
  * return : void  
  */
-void MCP2515_SetBitTiming(uint8_t rCNF1,uint8_t rCNF2,uint8_t rCNF3);
+PUBLIC void MCP2515_SetBitTiming(uint8_t rCNF1,uint8_t rCNF2,uint8_t rCNF3);
 
 
 
@@ -71,7 +102,7 @@ void MCP2515_SetBitTiming(uint8_t rCNF1,uint8_t rCNF2,uint8_t rCNF3);
  * param : mode 
  * return : void  
  */
-void MCP2515_Set_OperMode(uint8_t mode);
+PUBLIC void MCP2515_Set_OperMode(uint8_t mode);
 
 
 
@@ -82,7 +113,7 @@ void MCP2515_Set_OperMode(uint8_t mode);
  * param : EXT used to determine if EXT identifier or normal id 
  * return : void  
  */
-void MCP2515_SetMask(uint8_t n , uint32_t ID ,bool EXT);
+PUBLIC void MCP2515_SetMask(uint8_t n , uint32_t ID ,bool EXT);
 
 
 /*
@@ -92,15 +123,15 @@ void MCP2515_SetMask(uint8_t n , uint32_t ID ,bool EXT);
  * param : EXT used to determine if EXT identifier or normal id 
  * return : void  
  */
-void MCP2515_SetFilter( uint8_t n, uint32_t ID ,bool EXT );
+PUBLIC void MCP2515_SetFilter( uint8_t n, uint32_t ID ,bool EXT );
 
 
 /*
  * brief : this function used set interrupt 
- * param : void
+ * param : Init_Condition the interrupt enable bits
  * return : void  
  */
-void MCP2515_Enable_Interrupt(void);
+PUBLIC void MCP2515_Enable_Interrupt(uint8_t Init_Condition);
 
 
 
@@ -109,7 +140,7 @@ void MCP2515_Enable_Interrupt(void);
  * param : void
  * return : void  
  */
-void MCP2515_init(void);
+PUBLIC void MCP2515_init(void);
 
 
 
@@ -118,19 +149,23 @@ void MCP2515_init(void);
 
 /*
  * brief : this function used send message through CAN bus
- * param : bi buffer number
- * param : id Identifier number
- * param : data buffer pointer
- * param : porp data length in 0xf and ID type at 0x10 
+ * param : TXnum buffer number
+ * param : TransMesg struct hold all CAN message configuration 
  * return : void
  *  
  */
-void MCP2515_SendCANmsg(uint8_t bi,
-uint32_t id,
-uint8_t * data,
-uint8_t prop);
+PUBLIC void MCP2515_SendCANmsg(CANMesg_t * TransMesg,uint8_t TXnum);
 
 
+
+
+
+/*
+ * brief : this function used to read pending message from Mailbox 
+ * param : RecievedMesg pointer to struct that will hold all receive message information 
+ * return : bool if false means their is no pending message to read   
+ */
+PUBLIC bool MCP2515_receiveMesg(CANMesg_t * RecievedMesg);
 
 
 

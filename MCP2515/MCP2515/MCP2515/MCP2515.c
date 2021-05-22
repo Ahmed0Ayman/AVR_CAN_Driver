@@ -14,7 +14,9 @@ data which stored in this location
 *************************/
 
 
-static SPI_Handler_t  MCP2515_SPIHandler ;
+PRIVATE SPI_Handler_t  MCP2515_SPIHandler ;
+
+PRIVATE EXIT_Handler_t MCP2515_EXTIT ;
 
 
 
@@ -23,7 +25,7 @@ static SPI_Handler_t  MCP2515_SPIHandler ;
  * param : AddREG register addr that you need to read from 
  * return : the readed data 
  */
-uint8_t MCP2515_Read_Register(uint8_t AddREG)
+PUBLIC uint8_t MCP2515_Read_Register(uint8_t AddREG)
 {
 	uint8_t Instruction[] = {READ_INSTRUCTION,AddREG,0x00} ;
 	HAL_SPI_TransmitRecive(&MCP2515_SPIHandler,Instruction,Instruction,3);
@@ -41,7 +43,7 @@ uint8_t MCP2515_Read_Register(uint8_t AddREG)
  * param : value the value that you need to write to the register 
  * return : void 
  */
-void MCP2515_Write_Register(uint8_t AddREG,uint8_t value)
+PUBLIC void MCP2515_Write_Register(uint8_t AddREG,uint8_t value)
 {
 	uint8_t Instruction[] = {WRITE_INSTRUCTION,AddREG,value} ;
 	HAL_SPI_Transmit(&MCP2515_SPIHandler,Instruction,3);
@@ -56,7 +58,7 @@ void MCP2515_Write_Register(uint8_t AddREG,uint8_t value)
  * param : void 
  * return : void  
  */
-void MCP2515_Rest(void)
+PUBLIC void MCP2515_Rest(void)
 {
 	uint8_t Instruction = RESET_INSTRUCTION ;
 	HAL_SPI_Transmit(&MCP2515_SPIHandler,&Instruction,1);
@@ -77,7 +79,7 @@ void MCP2515_Rest(void)
  * param : rCNF3 CAN interface register 3
  * return : void  
  */
-void MCP2515_SetBitTiming(uint8_t rCNF1,uint8_t rCNF2,uint8_t rCNF3)
+PUBLIC void MCP2515_SetBitTiming(uint8_t rCNF1,uint8_t rCNF2,uint8_t rCNF3)
 {
 
 	MCP2515_Write_Register(CNF1,rCNF1);
@@ -95,7 +97,7 @@ void MCP2515_SetBitTiming(uint8_t rCNF1,uint8_t rCNF2,uint8_t rCNF3)
  * param : mode 
  * return : void  
  */
-void MCP2515_Set_OperMode(uint8_t mode)
+PUBLIC void MCP2515_Set_OperMode(uint8_t mode)
 {
 	uint8_t Instruction[] = {WRITE_INSTRUCTION,CANCTRL,mode} ;
 	HAL_SPI_Transmit(&MCP2515_SPIHandler,Instruction,3);
@@ -115,7 +117,7 @@ void MCP2515_Set_OperMode(uint8_t mode)
  * param : EXT used to determine if EXT identifier or normal id 
  * return : void  
  */
-void MCP2515_SetMask(uint8_t n , uint32_t ID ,bool EXT)
+PUBLIC void MCP2515_SetMask(uint8_t n , uint32_t ID ,bool EXT)
 {
 	
 
@@ -145,7 +147,7 @@ void MCP2515_SetMask(uint8_t n , uint32_t ID ,bool EXT)
  * param : EXT used to determine if EXT identifier or normal id 
  * return : void  
  */
-void MCP2515_SetFilter( uint8_t n, uint32_t ID ,bool EXT )
+PUBLIC void MCP2515_SetFilter( uint8_t n, uint32_t ID ,bool EXT )
 {
 
 	if (EXT)  // the length of ID is 29 bit
@@ -172,9 +174,9 @@ void MCP2515_SetFilter( uint8_t n, uint32_t ID ,bool EXT )
  * param : void
  * return : void  
  */
-void MCP2515_Enable_Interrupt(void)
+PUBLIC void MCP2515_Enable_Interrupt(uint8_t Init_Condition)
 {
-	uint8_t Instruction[] = {WRITE_INSTRUCTION,CANINTE,0x1c} ;
+	uint8_t Instruction[] = {WRITE_INSTRUCTION,CANINTE,Init_Condition} ;
 	HAL_SPI_Transmit(&MCP2515_SPIHandler,Instruction,3);
 
 }/* END_FUN MCP2515_Enable_Interrupt() */
@@ -186,69 +188,113 @@ void MCP2515_Enable_Interrupt(void)
  */
 void MCP2515_init(void)
 {
-
+	MCP2515_EXTIT.EXTI_NUM = EXTI_NUM_0 ;
+	MCP2515_EXTIT.EXTI_EDGE_DETECTION = EXTI_EDGE_LOW_LENEL ;
+	
 	MCP2515_SPIHandler.SPI_init.Mode = SPI_MODE_MASTER ;
 	MCP2515_SPIHandler.SPI_init.CLKPrescaler = SPI_CLKPrescaler_2 ;
 	HAL_SPI_Init(&MCP2515_SPIHandler);
-	MCP2515_Enable_Interrupt();
 	MCP2515_Rest();
+	MCP2515_Enable_Interrupt(0x03);
 	MCP2515_Set_OperMode(CONFIGURATION_MODE);
 	MCP2515_SetBitTiming(0x03,0xFA,0x87);
-	//	MCP2515_SetMask((uint8_t)0,(uint8_t)0x00,(uint8_t)0);
-	//	MCP2515_SetMask((uint8_t)1,(uint8_t)0x00,(uint8_t)0);
+	MCP2515_SetFilter((uint8_t)0,(uint8_t)0x0,(uint8_t)0x123);
+	MCP2515_SetMask((uint8_t)0,(uint8_t)0x00,(uint8_t)0xff);
 	MCP2515_Write_Register(TXRTSCTRL,0x07);
 	MCP2515_Set_OperMode(NORMAL_MODE);
-	
-}/* END_FUN MCP2515_init() */
+	EXTI_Init(&MCP2515_EXTIT);
+}
+/* END_FUN MCP2515_init() */
 
 
 
 
 /*
  * brief : this function used send message through CAN bus
- * param : bi buffer number
- * param : id Identifier number
- * param : data buffer pointer
- * param : porp data length in 0xf and ID type at 0x10 
+ * param : TXnum buffer number
+ * param : TransMesg struct hold all CAN message configuration 
  * return : void
  *  
  */
-void MCP2515_SendCANmsg(uint8_t bi,
-uint32_t id,
-uint8_t * data,
-uint8_t prop)
+PUBLIC void MCP2515_SendCANmsg(CANMesg_t * TransMesg,uint8_t TXnum)
 {
 	uint8_t dataTx[9] ;
 	unsigned char iteration =0;
-	MCP2515_Write_Register(TXBnCTRL(bi),(prop >> 6));
 
-	if(prop & 0x10)
+	if(TransMesg->CANControl.EXT_Field)
 	{
-		MCP2515_Write_Register(TXBnSIDH(bi),(unsigned char)(id>>3));
-		MCP2515_Write_Register((TXBnSIDL(bi)),(unsigned char)(id<<5)
-		|(1<<EXIDE)|(unsigned char)(id>>27));
-		MCP2515_Write_Register(TXBnEID8(bi),(unsigned char)(id>>19));
-		MCP2515_Write_Register(TXBnEID0(bi),(unsigned char)(id>>11));
-		} else {
-		MCP2515_Write_Register(TXBnSIDH(bi),(unsigned char)(id>>3));
-		MCP2515_Write_Register(TXBnSIDL(bi),(unsigned char)(id<<5));
+		MCP2515_Write_Register(TXBnSIDH(TXnum),(unsigned char)(TransMesg->ID>>3));
+		MCP2515_Write_Register((TXBnSIDL(TXnum)),(unsigned char)(TransMesg->ID<<5)
+		|(1<<EXIDE)|(unsigned char)(TransMesg->ID>>27));
+		MCP2515_Write_Register(TXBnEID8(TXnum),(unsigned char)(TransMesg->ID>>19));
+		MCP2515_Write_Register(TXBnEID0(TXnum),(unsigned char)(TransMesg->ID>>11));
+	} else {
+		MCP2515_Write_Register(TXBnSIDH(TXnum),(unsigned char)(TransMesg->ID>>3));
+		MCP2515_Write_Register(TXBnSIDL(TXnum),(unsigned char)(TransMesg->ID<<5));
 	}
 	/* Setup message length and RTR bit */
 	
-	MCP2515_Write_Register(TXBnDLC(bi),((prop & 0x0F) | ((prop & 0x20) ? (1 << RTR) : 0)));
+	if(TransMesg->CANControl.RTR_Field)
+	{
+	MCP2515_Write_Register(TXBnDLC(TXnum),(1 << RTR));	
+	}else{
+		
+	MCP2515_Write_Register(TXBnDLC(TXnum),(TransMesg->CANControl.LEN_Field));
 	dataTx[0] =LOADTX_INSTRUCTION|0x01u;
 	/* Store the message into the buffer */
-	for(iteration=0; iteration< (prop & 0x0F); iteration++)
-	{dataTx[iteration+1]=data[iteration];}
-	
+	for(iteration=0; iteration< TransMesg->CANControl.LEN_Field ; iteration++)
+	dataTx[iteration+1]= TransMesg->MesgData[iteration];
 	HAL_SPI_Transmit(&MCP2515_SPIHandler,dataTx,9);
-
-
+	}
 	/* Send request to send */
 	
-	dataTx[0] = 0x81+bi;
+	dataTx[0] = 0x81+TXnum;
 	HAL_SPI_Transmit(&MCP2515_SPIHandler,dataTx,1);
 	
 	
 	
 }/* END_FUN MCP2515_SendCANmsg() */
+
+
+
+
+
+
+
+/*
+ * brief : this function used to read pending message from Mailbox 
+ * param : RecievedMesg pointer to struct that will hold all receive message information 
+ * return : bool if false means their is no pending message to read   
+ */
+
+PUBLIC bool MCP2515_receiveMesg(CANMesg_t * RecievedMesg)
+{
+	uint8_t CANReaddata =0,MAilBoxNum =0 ;
+	
+	CANReaddata=MCP2515_Read_Register(CANSTAT);
+	if((CANReaddata == 0x0c))
+	{
+		MAilBoxNum = 0 ;
+	}
+	else if((CANReaddata == 0x0e)) /* means there is message is in Mailbox1 */
+	{
+		MAilBoxNum = 1 ;
+	}else{
+		return false ;
+	}
+	
+	CANReaddata = MCP2515_Read_Register(RXBnDLC(MAilBoxNum));
+	RecievedMesg->CANControl.LEN_Field = CANReaddata & 0x0f ;
+	RecievedMesg->CANControl.RTR_Field = (CANReaddata & 0x40)>>6 ;
+	CANReaddata = MCP2515_Read_Register(RXBnSIDL(MAilBoxNum));
+	RecievedMesg->CANControl.EXT_Field = (CANReaddata & 0x08 )>>3 ;
+	RecievedMesg->ID  = MCP2515_Read_Register(RXBnSIDH(MAilBoxNum));
+	RecievedMesg->ID  = (RecievedMesg->ID<<8)|MCP2515_Read_Register(RXBnSIDL(MAilBoxNum));
+	for (int iterator =0 ;iterator> RecievedMesg->CANControl.LEN_Field  ;iterator++)
+	{
+		RecievedMesg->MesgData[iterator] = MCP2515_Read_Register(RXBnDm(MAilBoxNum,iterator));
+	}
+	
+	MCP2515_Write_Register(CANINTF , 0x00 ); /* FIRST CLESR FLAG */
+	return true ;
+}
