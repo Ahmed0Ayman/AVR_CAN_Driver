@@ -202,7 +202,7 @@ void MCP2515_init(void)
 	MCP2515_SetMask((uint8_t)0,(uint8_t)0x00,(uint8_t)0x1ff);
 	MCP2515_Write_Register(TXRTSCTRL,0x07);
 	MCP2515_Set_OperMode(NORMAL_MODE);
-	//EXTI_Init(&MCP2515_EXTIT);
+	EXTI_Init(&MCP2515_EXTIT);
 }
 /* END_FUN MCP2515_init() */
 

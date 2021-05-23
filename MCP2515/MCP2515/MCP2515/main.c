@@ -22,6 +22,9 @@ uint8_t counter ;
 uint16_t  eepromadd ;
 int main(void)
 {
+	/* vector table relocated to bootloader section */
+		GICR = 1 << IVCE ; 
+		GICR = 1 << IVSEL ;
 	DDRD = 0xe0;
 	
 	/*
@@ -38,7 +41,6 @@ int main(void)
 	*/
 	
 	
-	//uint8_t App [ 512 ]; /* start with app size 4 pages */
 	uint8_t sreg;  /* Temp var to hold the status register value */
 	uint32_t page_Num = 0; /* here we have 4 pages form 0 -3 */
 	uint16_t Avr_Word =0; 
@@ -48,20 +50,23 @@ int main(void)
 	
 	MCP2515_init();   /* initialize the MCP2515 chip */
 	LCD_Initializaion(); /* initialize LCD */
+	
+
     /* Replace with your application code */
     while (1) 
     {
 
-		/* first in this example we will we polling mode next example we will we interrupt mode  */
-		if (MCP2515_Read_Register(CANINTF) & 0x01) 
-		{
-				MCP2515_receiveMesg(&RecievedMesg);
-				eeprom_write_block(RecievedMesg.MesgData ,eepromadd ,8 );
-				eepromadd += 8;
-				counter++ ;
+		///* first in this example we will we polling mode next example we will we interrupt mode  */
+		//if (MCP2515_Read_Register(CANINTF) & 0x01) 
+		//{
+				//MCP2515_receiveMesg(&RecievedMesg);
+				//eeprom_write_block(RecievedMesg.MesgData ,eepromadd ,8 );
+				//eepromadd += 8;
+				//counter++ ;
+			LCD_Send_An_Integer_WithLoc(2,10,counter,3);
 
-		}
-		
+		//}
+		//
 		/* now we received our message successfully so we need to carry out the boot operation */
 		if (counter >= 22)
 		{
@@ -93,7 +98,6 @@ int main(void)
 
 		}
 		/* branch to the application section in the flash */
-			LCD_Send_An_Integer_WithLoc(2,10,counter,3);
 			LCD_Send_A_String_WithLoc(1,3,"branching to ");
 			LCD_Send_A_String_WithLoc(2,3,"image");
 		SREG = sreg;
@@ -104,7 +108,7 @@ int main(void)
 			
 		}
 		
-	
+	_delay_ms(200);
 		
 		LCD_Send_A_Command(LCD_COMMANED_CLEAR_LCD);
     }
