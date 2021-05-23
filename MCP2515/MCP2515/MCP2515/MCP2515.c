@@ -199,10 +199,10 @@ void MCP2515_init(void)
 	MCP2515_Set_OperMode(CONFIGURATION_MODE);
 	MCP2515_SetBitTiming(0x03,0xFA,0x87);
 	MCP2515_SetFilter((uint8_t)0,(uint8_t)0x0,(uint8_t)0x123);
-	MCP2515_SetMask((uint8_t)0,(uint8_t)0x00,(uint8_t)0xff);
+	MCP2515_SetMask((uint8_t)0,(uint8_t)0x00,(uint8_t)0x1ff);
 	MCP2515_Write_Register(TXRTSCTRL,0x07);
 	MCP2515_Set_OperMode(NORMAL_MODE);
-	EXTI_Init(&MCP2515_EXTIT);
+	//EXTI_Init(&MCP2515_EXTIT);
 }
 /* END_FUN MCP2515_init() */
 
@@ -269,32 +269,34 @@ PUBLIC void MCP2515_SendCANmsg(CANMesg_t * TransMesg,uint8_t TXnum)
 
 PUBLIC bool MCP2515_receiveMesg(CANMesg_t * RecievedMesg)
 {
-	uint8_t CANReaddata =0,MAilBoxNum =0 ;
-	
-	CANReaddata=MCP2515_Read_Register(CANSTAT);
-	if((CANReaddata == 0x0c))
+	uint8_t CANReaddata =0,MAilBoxNum =0,iterator=0 ;
+	CANReaddata = MCP2515_Read_Register(CANINTF);
+	if((CANReaddata & 0x01))
 	{
 		MAilBoxNum = 0 ;
 	}
-	else if((CANReaddata == 0x0e)) /* means there is message is in Mailbox1 */
+	else if((CANReaddata & 0x02)) /* means there is message is in Mailbox1 */
 	{
 		MAilBoxNum = 1 ;
-	}else{
-		return false ;
 	}
-	
-	CANReaddata = MCP2515_Read_Register(RXBnDLC(MAilBoxNum));
-	RecievedMesg->CANControl.LEN_Field = CANReaddata & 0x0f ;
+	else{
+		return 0 ;
+	}
+
+	CANReaddata = MCP2515_Read_Register(CANSTAT);
 	RecievedMesg->CANControl.RTR_Field = (CANReaddata & 0x40)>>6 ;
 	CANReaddata = MCP2515_Read_Register(RXBnSIDL(MAilBoxNum));
 	RecievedMesg->CANControl.EXT_Field = (CANReaddata & 0x08 )>>3 ;
 	RecievedMesg->ID  = MCP2515_Read_Register(RXBnSIDH(MAilBoxNum));
-	RecievedMesg->ID  = (RecievedMesg->ID<<8)|MCP2515_Read_Register(RXBnSIDL(MAilBoxNum));
-	for (int iterator =0 ;iterator> RecievedMesg->CANControl.LEN_Field  ;iterator++)
+	RecievedMesg->ID  = (((uint32_t)RecievedMesg->ID<<3)|(CANReaddata>>5));
+	
+	
+	while(iterator != 8)
 	{
 		RecievedMesg->MesgData[iterator] = MCP2515_Read_Register(RXBnDm(MAilBoxNum,iterator));
+		iterator++;
 	}
-	
+
 	MCP2515_Write_Register(CANINTF , 0x00 ); /* FIRST CLESR FLAG */
 	return true ;
 }

@@ -40,11 +40,18 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o) (__utoa_common)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o) (strrev)
+C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+                              main.o (eeprom_read_byte)
+C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+                              main.o (eeprom_write_block)
+C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
+                              C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o) (eeprom_write_r18)
 
 Allocating common symbols
 Common symbol       size              file
 
 SPI_Handler         0xe               HAL_SPI.o
+eepromadd           0x2               main.o
 RecievedMesg        0xe               main.o
 counter             0x1               main.o
 TXMesg              0xe               main.o
@@ -56,6 +63,8 @@ Discarded input sections
  .text          0x00000000        0x0 HAL_EXIT.o
  .data          0x00000000        0x0 HAL_EXIT.o
  .bss           0x00000000        0x0 HAL_EXIT.o
+ .text.EXTI_Init
+                0x00000000       0x70 HAL_EXIT.o
  .text.EXIT_INT0_CallBack
                 0x00000000        0x2 HAL_EXIT.o
  .text.EXIT_INT1_CallBack
@@ -66,6 +75,16 @@ Discarded input sections
                 0x00000000       0x3a HAL_EXIT.o
  .text.EXIT_DISABLE
                 0x00000000       0x22 HAL_EXIT.o
+ .debug_info    0x00000000      0x1c6 HAL_EXIT.o
+ .debug_abbrev  0x00000000       0xaa HAL_EXIT.o
+ .debug_loc     0x00000000       0x78 HAL_EXIT.o
+ .debug_aranges
+                0x00000000       0x48 HAL_EXIT.o
+ .debug_ranges  0x00000000       0x38 HAL_EXIT.o
+ .debug_line    0x00000000      0x180 HAL_EXIT.o
+ .debug_str     0x00000000      0x233 HAL_EXIT.o
+ .comment       0x00000000       0x31 HAL_EXIT.o
+ .debug_frame   0x00000000       0x74 HAL_EXIT.o
  .text          0x00000000        0x0 HAL_GPIO.o
  .data          0x00000000        0x0 HAL_GPIO.o
  .bss           0x00000000        0x0 HAL_GPIO.o
@@ -100,24 +119,22 @@ Discarded input sections
  .text          0x00000000        0x0 Lcd-Driver.o
  .data          0x00000000        0x0 Lcd-Driver.o
  .bss           0x00000000        0x0 Lcd-Driver.o
- .text.LCD_Goto_Location
-                0x00000000       0x14 Lcd-Driver.o
+ .text.LCD_Send_A_String_With_CurrLoc
+                0x00000000       0x1a Lcd-Driver.o
  .text.LCD_Send_A_Character_WithLoc
                 0x00000000       0x2a Lcd-Driver.o
- .text.LCD_Send_A_String_WithLoc
-                0x00000000       0x1e Lcd-Driver.o
- .text.LCD_Send_An_Integer_WithLoc
-                0x00000000       0x90 Lcd-Driver.o
+ .text.LCD_Send_An_Integer_With_CurrLoc
+                0x00000000       0x56 Lcd-Driver.o
  .text.LCD_Send_A_Float_Withloc
                 0x00000000      0x170 Lcd-Driver.o
- .rodata.column_position
-                0x00000000        0x2 Lcd-Driver.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .text          0x00000000        0x0 MCP2515.o
  .data          0x00000000        0x0 MCP2515.o
  .bss           0x00000000        0x0 MCP2515.o
+ .text.MCP2515_SendCANmsg
+                0x00000000      0x1c2 MCP2515.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
@@ -243,6 +260,15 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .text          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+ .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+ .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+ .text          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+ .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+ .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+ .text          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
+ .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
+ .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
 
 Memory Configuration
 
@@ -268,6 +294,7 @@ LOAD MCP2515.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
 END GROUP
+Address of section .text set to 0x7000
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
@@ -374,51 +401,51 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xc38
+.text           0x00007000      0xb36
  *(.vectors)
- .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
-                0x00000000                __vector_default
-                0x00000000                __vectors
+ .vectors       0x00007000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
+                0x00007000                __vector_default
+                0x00007000                __vectors
  *(.vectors)
  *(.progmem.gcc*)
-                0x00000054                . = ALIGN (0x2)
-                0x00000054                __trampolines_start = .
+                0x00007054                . = ALIGN (0x2)
+                0x00007054                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x00000054        0x0 linker stubs
+ .trampolines   0x00007054        0x0 linker stubs
  *(.trampolines*)
-                0x00000054                __trampolines_end = .
+                0x00007054                __trampolines_end = .
  *libprintf_flt.a:*(.progmem.data)
  *libc.a:*(.progmem.data)
  *(.progmem*)
-                0x00000054                . = ALIGN (0x2)
+                0x00007054                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000054                __ctors_start = .
+                0x00007054                __ctors_start = .
  *(.ctors)
-                0x00000054                __ctors_end = .
-                0x00000054                __dtors_start = .
+                0x00007054                __ctors_end = .
+                0x00007054                __dtors_start = .
  *(.dtors)
-                0x00000054                __dtors_end = .
+                0x00007054                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000054        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
-                0x00000054                __init
+ .init0         0x00007054        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
+                0x00007054                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000054        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
+ .init2         0x00007054        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000060       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                0x00000060                __do_copy_data
- .init4         0x00000076       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                0x00000076                __do_clear_bss
+ .init4         0x00007060       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00007060                __do_copy_data
+ .init4         0x00007076       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00007076                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -429,130 +456,137 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000086        0x8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
+ .init9         0x00007086        0x8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
  *(.init9)
  *(.text)
- .text          0x0000008e        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
-                0x0000008e                __vector_12
-                0x0000008e                __bad_interrupt
-                0x0000008e                __vector_6
-                0x0000008e                __vector_3
-                0x0000008e                __vector_11
-                0x0000008e                __vector_13
-                0x0000008e                __vector_17
-                0x0000008e                __vector_19
-                0x0000008e                __vector_7
-                0x0000008e                __vector_5
-                0x0000008e                __vector_4
-                0x0000008e                __vector_9
-                0x0000008e                __vector_2
-                0x0000008e                __vector_15
-                0x0000008e                __vector_8
-                0x0000008e                __vector_14
-                0x0000008e                __vector_10
-                0x0000008e                __vector_16
-                0x0000008e                __vector_18
-                0x0000008e                __vector_20
-                0x00000092                . = ALIGN (0x2)
+ .text          0x0000708e        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
+                0x0000708e                __vector_12
+                0x0000708e                __bad_interrupt
+                0x0000708e                __vector_6
+                0x0000708e                __vector_3
+                0x0000708e                __vector_11
+                0x0000708e                __vector_13
+                0x0000708e                __vector_17
+                0x0000708e                __vector_19
+                0x0000708e                __vector_7
+                0x0000708e                __vector_5
+                0x0000708e                __vector_4
+                0x0000708e                __vector_9
+                0x0000708e                __vector_2
+                0x0000708e                __vector_15
+                0x0000708e                __vector_8
+                0x0000708e                __vector_14
+                0x0000708e                __vector_10
+                0x0000708e                __vector_16
+                0x0000708e                __vector_18
+                0x0000708e                __vector_20
+                0x00007092                . = ALIGN (0x2)
  *(.text.*)
- .text.EXTI_Init
-                0x00000092       0x70 HAL_EXIT.o
-                0x00000092                EXTI_Init
  .text.HAL_GPIO_INIT_PIN
-                0x00000102       0x42 HAL_GPIO.o
-                0x00000102                HAL_GPIO_INIT_PIN
+                0x00007092       0x42 HAL_GPIO.o
+                0x00007092                HAL_GPIO_INIT_PIN
  .text.HAL_GPIO_WRITEPIN
-                0x00000144       0x1a HAL_GPIO.o
-                0x00000144                HAL_GPIO_WRITEPIN
+                0x000070d4       0x1a HAL_GPIO.o
+                0x000070d4                HAL_GPIO_WRITEPIN
  .text.HAL_GPIO_WRITEPORT
-                0x0000015e        0xe HAL_GPIO.o
-                0x0000015e                HAL_GPIO_WRITEPORT
+                0x000070ee        0xe HAL_GPIO.o
+                0x000070ee                HAL_GPIO_WRITEPORT
  .text.HAL_SPI_Init
-                0x0000016c       0xc4 HAL_SPI.o
-                0x0000016c                HAL_SPI_Init
+                0x000070fc       0xc4 HAL_SPI.o
+                0x000070fc                HAL_SPI_Init
  .text.HAL_SPI_Transmit
-                0x00000230       0x5e HAL_SPI.o
-                0x00000230                HAL_SPI_Transmit
+                0x000071c0       0x5e HAL_SPI.o
+                0x000071c0                HAL_SPI_Transmit
  .text.HAL_SPI_TransmitRecive
-                0x0000028e       0x70 HAL_SPI.o
-                0x0000028e                HAL_SPI_TransmitRecive
+                0x0000721e       0x70 HAL_SPI.o
+                0x0000721e                HAL_SPI_TransmitRecive
  .text.LCD_Triger_Enable
-                0x000002fe       0x2e Lcd-Driver.o
+                0x0000728e       0x2e Lcd-Driver.o
  .text.LCD_Send_4BitData
-                0x0000032c       0x30 Lcd-Driver.o
-                0x0000032c                LCD_Send_4BitData
+                0x000072bc       0x30 Lcd-Driver.o
+                0x000072bc                LCD_Send_4BitData
  .text.LCD_Send_A_Character_With_CurrLoc
-                0x0000035c       0x26 Lcd-Driver.o
-                0x0000035c                LCD_Send_A_Character_With_CurrLoc
+                0x000072ec       0x26 Lcd-Driver.o
+                0x000072ec                LCD_Send_A_Character_With_CurrLoc
  .text.LCD_Send_A_Command
-                0x00000382       0x1a Lcd-Driver.o
-                0x00000382                LCD_Send_A_Command
- .text.LCD_Send_A_String_With_CurrLoc
-                0x0000039c       0x1a Lcd-Driver.o
-                0x0000039c                LCD_Send_A_String_With_CurrLoc
+                0x00007312       0x1a Lcd-Driver.o
+                0x00007312                LCD_Send_A_Command
+ .text.LCD_Goto_Location
+                0x0000732c       0x14 Lcd-Driver.o
+                0x0000732c                LCD_Goto_Location
  .text.LCD_Initializaion
-                0x000003b6       0x60 Lcd-Driver.o
-                0x000003b6                LCD_Initializaion
- .text.LCD_Send_An_Integer_With_CurrLoc
-                0x00000416       0x56 Lcd-Driver.o
-                0x00000416                LCD_Send_An_Integer_With_CurrLoc
- .text.main     0x0000046c       0x70 main.o
-                0x0000046c                main
+                0x00007340       0x60 Lcd-Driver.o
+                0x00007340                LCD_Initializaion
+ .text.LCD_Send_A_String_WithLoc
+                0x000073a0       0x1e Lcd-Driver.o
+                0x000073a0                LCD_Send_A_String_WithLoc
+ .text.LCD_Send_An_Integer_WithLoc
+                0x000073be       0x90 Lcd-Driver.o
+                0x000073be                LCD_Send_An_Integer_WithLoc
+ .text.main     0x0000744e      0x14e main.o
+                0x0000744e                main
  .text.__vector_1
-                0x000004dc       0x5a main.o
-                0x000004dc                __vector_1
+                0x0000759c       0x5a main.o
+                0x0000759c                __vector_1
  .text.MCP2515_Read_Register
-                0x00000536       0x36 MCP2515.o
-                0x00000536                MCP2515_Read_Register
+                0x000075f6       0x36 MCP2515.o
+                0x000075f6                MCP2515_Read_Register
  .text.MCP2515_Write_Register
-                0x0000056c       0x32 MCP2515.o
-                0x0000056c                MCP2515_Write_Register
+                0x0000762c       0x32 MCP2515.o
+                0x0000762c                MCP2515_Write_Register
  .text.MCP2515_Rest
-                0x0000059e       0x3a MCP2515.o
-                0x0000059e                MCP2515_Rest
+                0x0000765e       0x3a MCP2515.o
+                0x0000765e                MCP2515_Rest
  .text.MCP2515_SetBitTiming
-                0x000005d8       0x26 MCP2515.o
-                0x000005d8                MCP2515_SetBitTiming
+                0x00007698       0x26 MCP2515.o
+                0x00007698                MCP2515_SetBitTiming
  .text.MCP2515_Set_OperMode
-                0x000005fe       0x34 MCP2515.o
-                0x000005fe                MCP2515_Set_OperMode
+                0x000076be       0x34 MCP2515.o
+                0x000076be                MCP2515_Set_OperMode
  .text.MCP2515_SetMask
-                0x00000632       0xf0 MCP2515.o
-                0x00000632                MCP2515_SetMask
+                0x000076f2       0xf0 MCP2515.o
+                0x000076f2                MCP2515_SetMask
  .text.MCP2515_SetFilter
-                0x00000722      0x124 MCP2515.o
-                0x00000722                MCP2515_SetFilter
+                0x000077e2      0x124 MCP2515.o
+                0x000077e2                MCP2515_SetFilter
  .text.MCP2515_Enable_Interrupt
-                0x00000846       0x34 MCP2515.o
-                0x00000846                MCP2515_Enable_Interrupt
+                0x00007906       0x34 MCP2515.o
+                0x00007906                MCP2515_Enable_Interrupt
  .text.MCP2515_init
-                0x0000087a       0x6a MCP2515.o
-                0x0000087a                MCP2515_init
- .text.MCP2515_SendCANmsg
-                0x000008e4      0x1c2 MCP2515.o
-                0x000008e4                MCP2515_SendCANmsg
+                0x0000793a       0x58 MCP2515.o
+                0x0000793a                MCP2515_init
  .text.MCP2515_receiveMesg
-                0x00000aa6      0x10e MCP2515.o
-                0x00000aa6                MCP2515_receiveMesg
+                0x00007992       0xe2 MCP2515.o
+                0x00007992                MCP2515_receiveMesg
  .text.avr-libc
-                0x00000bb4       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
-                0x00000bb4                __itoa
-                0x00000bb4                itoa
+                0x00007a74       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x00007a74                __itoa
+                0x00007a74                itoa
  .text.avr-libc
-                0x00000bca       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
-                0x00000bca                __itoa_ncheck
+                0x00007a8a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
+                0x00007a8a                __itoa_ncheck
  .text.avr-libc
-                0x00000be0       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
-                0x00000be0                __utoa_ncheck
-                0x00000be2                __utoa_common
+                0x00007aa0       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
+                0x00007aa0                __utoa_ncheck
+                0x00007aa2                __utoa_common
  .text.avr-libc
-                0x00000c14       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x00000c14                strrev
-                0x00000c34                . = ALIGN (0x2)
+                0x00007ad4       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00007ad4                strrev
+ .text.avr-libc
+                0x00007af4       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+                0x00007af4                eeprom_read_byte
+ .text.avr-libc
+                0x00007b04       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+                0x00007b04                eeprom_write_block
+ .text.avr-libc
+                0x00007b18       0x1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
+                0x00007b18                eeprom_write_byte
+                0x00007b1a                eeprom_write_r18
+                0x00007b32                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000c34        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000c34                _exit
-                0x00000c34                exit
+ .fini9         0x00007b32        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00007b32                _exit
+                0x00007b32                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -571,46 +605,49 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000c34        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00007b32        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000c38                _etext = .
+                0x00007b36                _etext = .
 
-.data           0x00800060        0x0 load address 0x00000c38
+.data           0x00800060       0x16 load address 0x00007b36
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
+ .rodata.column_position
+                0x00800060        0x2 Lcd-Driver.o
+ .rodata.str1.1
+                0x00800062       0x14 main.o
  *(.gnu.linkonce.r*)
-                0x00800060                . = ALIGN (0x2)
-                0x00800060                _edata = .
-                0x00800060                PROVIDE (__data_end, .)
+                0x00800076                . = ALIGN (0x2)
+                0x00800076                _edata = .
+                0x00800076                PROVIDE (__data_end, .)
 
-.bss            0x00800060       0x30
-                0x00800060                PROVIDE (__bss_start, .)
+.bss            0x00800076       0x30
+                0x00800076                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.LCD_GPIO_Handler
-                0x00800060        0x3 Lcd-Driver.o
- .bss.MCP2515_EXTIT
-                0x00800063        0x2 MCP2515.o
+                0x00800076        0x3 Lcd-Driver.o
  .bss.MCP2515_SPIHandler
-                0x00800065        0xe MCP2515.o
+                0x00800079        0xe MCP2515.o
  *(COMMON)
- COMMON         0x00800073       0x1d main.o
-                0x00800073                RecievedMesg
-                0x00800081                counter
-                0x00800082                TXMesg
-                0x00800090                PROVIDE (__bss_end, .)
-                0x00000c38                __data_load_start = LOADADDR (.data)
-                0x00000c38                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800087       0x1f main.o
+                0x00800087                eepromadd
+                0x00800089                RecievedMesg
+                0x00800097                counter
+                0x00800098                TXMesg
+                0x008000a6                PROVIDE (__bss_end, .)
+                0x00007b36                __data_load_start = LOADADDR (.data)
+                0x00007b4c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800090        0x0
+.noinit         0x008000a6        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800090                _end = .
+                0x008000a6                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -652,9 +689,8 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 HAL_EXIT.o
+ .comment       0x00000000       0x30 HAL_GPIO.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 HAL_GPIO.o
  .comment       0x00000030       0x31 HAL_SPI.o
  .comment       0x00000030       0x31 Lcd-Driver.o
  .comment       0x00000030       0x31 main.o
@@ -680,87 +716,93 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x210
+.debug_aranges  0x00000000      0x228
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x48 HAL_EXIT.o
+                0x00000000       0x60 HAL_GPIO.o
  .debug_aranges
-                0x00000048       0x60 HAL_GPIO.o
+                0x00000060       0x58 HAL_SPI.o
  .debug_aranges
-                0x000000a8       0x58 HAL_SPI.o
+                0x000000b8       0x78 Lcd-Driver.o
  .debug_aranges
-                0x00000100       0x78 Lcd-Driver.o
+                0x00000130       0x28 main.o
  .debug_aranges
-                0x00000178       0x28 main.o
+                0x00000158       0x70 MCP2515.o
  .debug_aranges
-                0x000001a0       0x70 MCP2515.o
+                0x000001c8       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+ .debug_aranges
+                0x000001e8       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+ .debug_aranges
+                0x00000208       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x2712
+.debug_info     0x00000000     0x27ae
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_info    0x000004e6      0x1c6 HAL_EXIT.o
- .debug_info    0x000006ac      0x321 HAL_GPIO.o
- .debug_info    0x000009cd      0x60b HAL_SPI.o
- .debug_info    0x00000fd8      0x994 Lcd-Driver.o
- .debug_info    0x0000196c      0x2ea main.o
- .debug_info    0x00001c56      0xabc MCP2515.o
+ .debug_info    0x000004e6      0x321 HAL_GPIO.o
+ .debug_info    0x00000807      0x60b HAL_SPI.o
+ .debug_info    0x00000e12      0x994 Lcd-Driver.o
+ .debug_info    0x000017a6      0x3cd main.o
+ .debug_info    0x00001b73      0xa6f MCP2515.o
+ .debug_info    0x000025e2       0x99 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+ .debug_info    0x0000267b       0x9a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+ .debug_info    0x00002715       0x99 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
 
-.debug_abbrev   0x00000000      0xd56
+.debug_abbrev   0x00000000      0xca7
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_abbrev  0x000004a3       0xaa HAL_EXIT.o
- .debug_abbrev  0x0000054d       0xf1 HAL_GPIO.o
- .debug_abbrev  0x0000063e      0x11e HAL_SPI.o
- .debug_abbrev  0x0000075c      0x23e Lcd-Driver.o
- .debug_abbrev  0x0000099a      0x196 main.o
- .debug_abbrev  0x00000b30      0x226 MCP2515.o
+ .debug_abbrev  0x000004a3       0xf1 HAL_GPIO.o
+ .debug_abbrev  0x00000594      0x11e HAL_SPI.o
+ .debug_abbrev  0x000006b2      0x23e Lcd-Driver.o
+ .debug_abbrev  0x000008f0      0x160 main.o
+ .debug_abbrev  0x00000a50      0x21b MCP2515.o
+ .debug_abbrev  0x00000c6b       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+ .debug_abbrev  0x00000c7f       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+ .debug_abbrev  0x00000c93       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
 
-.debug_line     0x00000000     0x121f
+.debug_line     0x00000000     0x12da
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_line    0x00000116      0x180 HAL_EXIT.o
- .debug_line    0x00000296      0x1e4 HAL_GPIO.o
- .debug_line    0x0000047a      0x37b HAL_SPI.o
- .debug_line    0x000007f5      0x3ec Lcd-Driver.o
- .debug_line    0x00000be1      0x1b6 main.o
- .debug_line    0x00000d97      0x488 MCP2515.o
+ .debug_line    0x00000116      0x1e4 HAL_GPIO.o
+ .debug_line    0x000002fa      0x37b HAL_SPI.o
+ .debug_line    0x00000675      0x3ec Lcd-Driver.o
+ .debug_line    0x00000a61      0x27f main.o
+ .debug_line    0x00000ce0      0x468 MCP2515.o
+ .debug_line    0x00001148       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eerd_byte.o)
+ .debug_line    0x000011c2       0x80 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_block.o)
+ .debug_line    0x00001242       0x98 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5\libatmega32a.a(eewr_byte.o)
 
-.debug_frame    0x00000000      0x5dc
+.debug_frame    0x00000000      0x558
  *(.debug_frame)
- .debug_frame   0x00000000       0x74 HAL_EXIT.o
- .debug_frame   0x00000074       0xa4 HAL_GPIO.o
- .debug_frame   0x00000118       0xd4 HAL_SPI.o
- .debug_frame   0x000001ec      0x1c4 Lcd-Driver.o
- .debug_frame   0x000003b0       0x7c main.o
- .debug_frame   0x0000042c      0x1b0 MCP2515.o
+ .debug_frame   0x00000000       0xa4 HAL_GPIO.o
+ .debug_frame   0x000000a4       0xd4 HAL_SPI.o
+ .debug_frame   0x00000178      0x1c4 Lcd-Driver.o
+ .debug_frame   0x0000033c       0x7c main.o
+ .debug_frame   0x000003b8      0x1a0 MCP2515.o
 
-.debug_str      0x00000000      0xb64
+.debug_str      0x00000000      0xb23
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_str     0x00000196      0x1f7 HAL_EXIT.o
-                                0x233 (size before relaxing)
- .debug_str     0x0000038d      0x19e HAL_GPIO.o
+ .debug_str     0x00000196      0x2e3 HAL_GPIO.o
                                 0x31c (size before relaxing)
- .debug_str     0x0000052b      0x1b2 HAL_SPI.o
+ .debug_str     0x00000479      0x1b2 HAL_SPI.o
                                 0x3be (size before relaxing)
- .debug_str     0x000006dd      0x25d Lcd-Driver.o
+ .debug_str     0x0000062b      0x25d Lcd-Driver.o
                                 0x47d (size before relaxing)
- .debug_str     0x0000093a       0xda main.o
-                                0x2ed (size before relaxing)
- .debug_str     0x00000a14      0x150 MCP2515.o
-                                0x4d1 (size before relaxing)
+ .debug_str     0x00000888      0x12b main.o
+                                0x31a (size before relaxing)
+ .debug_str     0x000009b3      0x170 MCP2515.o
+                                0x4c7 (size before relaxing)
 
-.debug_loc      0x00000000     0x1840
+.debug_loc      0x00000000     0x1856
  *(.debug_loc)
- .debug_loc     0x00000000       0x78 HAL_EXIT.o
- .debug_loc     0x00000078      0x171 HAL_GPIO.o
- .debug_loc     0x000001e9      0x46f HAL_SPI.o
- .debug_loc     0x00000658      0x8b0 Lcd-Driver.o
- .debug_loc     0x00000f08      0x113 main.o
- .debug_loc     0x0000101b      0x825 MCP2515.o
+ .debug_loc     0x00000000      0x171 HAL_GPIO.o
+ .debug_loc     0x00000171      0x46f HAL_SPI.o
+ .debug_loc     0x000005e0      0x8b0 Lcd-Driver.o
+ .debug_loc     0x00000e90      0x1c1 main.o
+ .debug_loc     0x00001051      0x805 MCP2515.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -780,14 +822,13 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x1b0
+.debug_ranges   0x00000000      0x178
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x38 HAL_EXIT.o
- .debug_ranges  0x00000038       0x50 HAL_GPIO.o
- .debug_ranges  0x00000088       0x48 HAL_SPI.o
- .debug_ranges  0x000000d0       0x68 Lcd-Driver.o
- .debug_ranges  0x00000138       0x18 main.o
- .debug_ranges  0x00000150       0x60 MCP2515.o
+ .debug_ranges  0x00000000       0x50 HAL_GPIO.o
+ .debug_ranges  0x00000050       0x48 HAL_SPI.o
+ .debug_ranges  0x00000098       0x68 Lcd-Driver.o
+ .debug_ranges  0x00000100       0x18 main.o
+ .debug_ranges  0x00000118       0x60 MCP2515.o
 
 .debug_macro
  *(.debug_macro)
