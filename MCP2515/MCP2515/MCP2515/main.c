@@ -70,10 +70,10 @@ int main(void)
 		/* now we received our message successfully so we need to carry out the boot operation */
 		if (counter >= 22)
 		{
+		cli();
 
 		/* Disable interrupts before start nay operation on the flash as explained in the data sheet */
 		sreg = SREG;
-		cli();
 		
 		/* flash the code */
 		for ( page_Num =0;page_Num <4 ;page_Num++)	 /* iterate on the for pages */
@@ -100,6 +100,9 @@ int main(void)
 		/* branch to the application section in the flash */
 			LCD_Send_A_String_WithLoc(1,3,"branching to ");
 			LCD_Send_A_String_WithLoc(2,3,"image");
+			_delay_ms(3000);
+			LCD_Send_A_Command(LCD_COMMANED_CLEAR_LCD);
+
 		SREG = sreg;
 		asm ( "jmp 0x0000" );			
 			
@@ -121,7 +124,8 @@ ISR(INT0_vect)
 	counter++;
 
 	MCP2515_receiveMesg(&RecievedMesg);
-	
+	eeprom_write_block(RecievedMesg.MesgData ,eepromadd ,8 );
+	eepromadd += 8;
 	PORTD = 0x80;
 
 }

@@ -3,38 +3,38 @@ MCP2515.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000b62  00007000  00007000  00000094  2**1
+  0 .text         00000bce  00007000  00007000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000016  00800060  00007b62  00000bf6  2**0
+  1 .data         00000016  00800060  00007bce  00000c62  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000032  00800076  00800076  00000c0c  2**0
+  2 .bss          00000032  00800076  00800076  00000c78  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000c0c  2**0
+  3 .comment      00000030  00000000  00000000  00000c78  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000c3c  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000ca8  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000230  00000000  00000000  00000c78  2**3
+  5 .debug_aranges 00000270  00000000  00000000  00000ce8  2**3
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002879  00000000  00000000  00000ea8  2**0
+  6 .debug_info   00002a2b  00000000  00000000  00000f58  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000d91  00000000  00000000  00003721  2**0
+  7 .debug_abbrev 00000db9  00000000  00000000  00003983  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000013b4  00000000  00000000  000044b2  2**0
+  8 .debug_line   000014ea  00000000  00000000  0000473c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000005cc  00000000  00000000  00005868  2**2
+  9 .debug_frame  000005cc  00000000  00000000  00005c28  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000b96  00000000  00000000  00005e34  2**0
+ 10 .debug_str    00000ba9  00000000  00000000  000061f4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001916  00000000  00000000  000069ca  2**0
+ 11 .debug_loc    0000195e  00000000  00000000  00006d9d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000001b0  00000000  00000000  000082e0  2**0
+ 12 .debug_ranges 000001b0  00000000  00000000  000086fb  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00007000 <__vectors>:
     7000:	0c 94 2a 38 	jmp	0x7054	; 0x7054 <__ctors_end>
-    7004:	0c 94 f2 3a 	jmp	0x75e4	; 0x75e4 <__vector_1>
+    7004:	0c 94 fe 3a 	jmp	0x75fc	; 0x75fc <__vector_1>
     7008:	0c 94 47 38 	jmp	0x708e	; 0x708e <__bad_interrupt>
     700c:	0c 94 47 38 	jmp	0x708e	; 0x708e <__bad_interrupt>
     7010:	0c 94 47 38 	jmp	0x708e	; 0x708e <__bad_interrupt>
@@ -67,7 +67,7 @@ Disassembly of section .text:
     7060:	10 e0       	ldi	r17, 0x00	; 0
     7062:	a0 e6       	ldi	r26, 0x60	; 96
     7064:	b0 e0       	ldi	r27, 0x00	; 0
-    7066:	e2 e6       	ldi	r30, 0x62	; 98
+    7066:	ee ec       	ldi	r30, 0xCE	; 206
     7068:	fb e7       	ldi	r31, 0x7B	; 123
     706a:	02 c0       	rjmp	.+4      	; 0x7070 <__do_copy_data+0x10>
     706c:	05 90       	lpm	r0, Z+
@@ -90,7 +90,7 @@ Disassembly of section .text:
     7082:	b2 07       	cpc	r27, r18
     7084:	e1 f7       	brne	.-8      	; 0x707e <.do_clear_bss_loop>
     7086:	0e 94 5f 3a 	call	0x74be	; 0x74be <main>
-    708a:	0c 94 af 3d 	jmp	0x7b5e	; 0x7b5e <_exit>
+    708a:	0c 94 e5 3d 	jmp	0x7bca	; 0x7bca <_exit>
 
 0000708e <__bad_interrupt>:
     708e:	0c 94 00 38 	jmp	0x7000	; 0x7000 <__vectors>
@@ -759,7 +759,7 @@ void LCD_Send_An_Integer_WithLoc(uint8_t y, uint8_t x, uint16_t IntegerToDisplay
     7470:	4a e0       	ldi	r20, 0x0A	; 10
     7472:	50 e0       	ldi	r21, 0x00	; 0
     7474:	b9 01       	movw	r22, r18
-    7476:	0e 94 67 3d 	call	0x7ace	; 0x7ace <itoa>
+    7476:	0e 94 86 3d 	call	0x7b0c	; 0x7b0c <itoa>
 	for (uint16_t i=0;i<NumberOfDigits;i++)
     747a:	00 e0       	ldi	r16, 0x00	; 0
     747c:	10 e0       	ldi	r17, 0x00	; 0
@@ -826,7 +826,7 @@ int main(void)
 	
 	
 	MCP2515_init();   /* initialize the MCP2515 chip */
-    74ca:	0e 94 c1 3c 	call	0x7982	; 0x7982 <MCP2515_init>
+    74ca:	0e 94 e0 3c 	call	0x79c0	; 0x79c0 <MCP2515_init>
 	LCD_Initializaion(); /* initialize LCD */
     74ce:	0e 94 d8 39 	call	0x73b0	; 0x73b0 <LCD_Initializaion>
 	
@@ -857,14 +857,14 @@ int main(void)
     74e6:	80 91 99 00 	lds	r24, 0x0099	; 0x800099 <counter>
     74ea:	86 31       	cpi	r24, 0x16	; 22
     74ec:	08 f4       	brcc	.+2      	; 0x74f0 <main+0x32>
-    74ee:	6d c0       	rjmp	.+218    	; 0x75ca <main+0x10c>
+    74ee:	79 c0       	rjmp	.+242    	; 0x75e2 <main+0x124>
 		{
+		cli();
+    74f0:	f8 94       	cli
 
 		/* Disable interrupts before start nay operation on the flash as explained in the data sheet */
 		sreg = SREG;
-    74f0:	5f b6       	in	r5, 0x3f	; 63
-		cli();
-    74f2:	f8 94       	cli
+    74f2:	5f b6       	in	r5, 0x3f	; 63
 		
 		/* flash the code */
 		for ( page_Num =0;page_Num <4 ;page_Num++)	 /* iterate on the for pages */
@@ -906,7 +906,7 @@ int main(void)
 				
 				Avr_Word = eeprom_read_byte(buf++);
     752c:	c7 01       	movw	r24, r14
-    752e:	0e 94 a7 3d 	call	0x7b4e	; 0x7b4e <eeprom_read_byte>
+    752e:	0e 94 c6 3d 	call	0x7b8c	; 0x7b8c <eeprom_read_byte>
     7532:	c8 2f       	mov	r28, r24
     7534:	d0 e0       	ldi	r29, 0x00	; 0
 				Avr_Word |= eeprom_read_byte(buf++) << 8;
@@ -915,7 +915,7 @@ int main(void)
     753a:	f2 e0       	ldi	r31, 0x02	; 2
     753c:	ef 0e       	add	r14, r31
     753e:	f1 1c       	adc	r15, r1
-    7540:	0e 94 a7 3d 	call	0x7b4e	; 0x7b4e <eeprom_read_byte>
+    7540:	0e 94 c6 3d 	call	0x7b8c	; 0x7b8c <eeprom_read_byte>
     7544:	90 e0       	ldi	r25, 0x00	; 0
     7546:	98 2f       	mov	r25, r24
     7548:	88 27       	eor	r24, r24
@@ -969,9 +969,9 @@ int main(void)
     758c:	81 e1       	ldi	r24, 0x11	; 17
     758e:	80 93 57 00 	sts	0x0057, r24	; 0x800057 <__TEXT_REGION_LENGTH__+0x7f8057>
     7592:	e8 95       	spm
+
 		/* Disable interrupts before start nay operation on the flash as explained in the data sheet */
 		sreg = SREG;
-		cli();
 		
 		/* flash the code */
 		for ( page_Num =0;page_Num <4 ;page_Num++)	 /* iterate on the for pages */
@@ -1004,814 +1004,869 @@ int main(void)
     75bc:	63 e0       	ldi	r22, 0x03	; 3
     75be:	82 e0       	ldi	r24, 0x02	; 2
     75c0:	0e 94 08 3a 	call	0x7410	; 0x7410 <LCD_Send_A_String_WithLoc>
+    75c4:	8f ef       	ldi	r24, 0xFF	; 255
+    75c6:	9b e7       	ldi	r25, 0x7B	; 123
+    75c8:	e2 e9       	ldi	r30, 0x92	; 146
+    75ca:	81 50       	subi	r24, 0x01	; 1
+    75cc:	90 40       	sbci	r25, 0x00	; 0
+    75ce:	e0 40       	sbci	r30, 0x00	; 0
+    75d0:	e1 f7       	brne	.-8      	; 0x75ca <main+0x10c>
+    75d2:	00 c0       	rjmp	.+0      	; 0x75d4 <main+0x116>
+    75d4:	00 00       	nop
+			_delay_ms(3000);
+			LCD_Send_A_Command(LCD_COMMANED_CLEAR_LCD);
+    75d6:	81 e0       	ldi	r24, 0x01	; 1
+    75d8:	0e 94 c1 39 	call	0x7382	; 0x7382 <LCD_Send_A_Command>
+
 		SREG = sreg;
-    75c4:	5f be       	out	0x3f, r5	; 63
+    75dc:	5f be       	out	0x3f, r5	; 63
 		asm ( "jmp 0x0000" );			
-    75c6:	0c 94 00 00 	jmp	0	; 0x0 <__TEXT_REGION_ORIGIN__>
-    75ca:	8f ef       	ldi	r24, 0xFF	; 255
-    75cc:	93 ec       	ldi	r25, 0xC3	; 195
-    75ce:	e9 e0       	ldi	r30, 0x09	; 9
-    75d0:	81 50       	subi	r24, 0x01	; 1
-    75d2:	90 40       	sbci	r25, 0x00	; 0
-    75d4:	e0 40       	sbci	r30, 0x00	; 0
-    75d6:	e1 f7       	brne	.-8      	; 0x75d0 <main+0x112>
-    75d8:	00 c0       	rjmp	.+0      	; 0x75da <main+0x11c>
-    75da:	00 00       	nop
+    75de:	0c 94 00 00 	jmp	0	; 0x0 <__TEXT_REGION_ORIGIN__>
+    75e2:	ff ef       	ldi	r31, 0xFF	; 255
+    75e4:	23 ec       	ldi	r18, 0xC3	; 195
+    75e6:	89 e0       	ldi	r24, 0x09	; 9
+    75e8:	f1 50       	subi	r31, 0x01	; 1
+    75ea:	20 40       	sbci	r18, 0x00	; 0
+    75ec:	80 40       	sbci	r24, 0x00	; 0
+    75ee:	e1 f7       	brne	.-8      	; 0x75e8 <main+0x12a>
+    75f0:	00 c0       	rjmp	.+0      	; 0x75f2 <main+0x134>
+    75f2:	00 00       	nop
 			
 		}
 		
 	_delay_ms(200);
 		
 		LCD_Send_A_Command(LCD_COMMANED_CLEAR_LCD);
-    75dc:	81 e0       	ldi	r24, 0x01	; 1
-    75de:	0e 94 c1 39 	call	0x7382	; 0x7382 <LCD_Send_A_Command>
+    75f4:	81 e0       	ldi	r24, 0x01	; 1
+    75f6:	0e 94 c1 39 	call	0x7382	; 0x7382 <LCD_Send_A_Command>
     }
-    75e2:	79 cf       	rjmp	.-270    	; 0x74d6 <main+0x18>
+    75fa:	6d cf       	rjmp	.-294    	; 0x74d6 <main+0x18>
 
-000075e4 <__vector_1>:
+000075fc <__vector_1>:
 	return 0 ;
 }
 
 ISR(INT0_vect)
 {
-    75e4:	1f 92       	push	r1
-    75e6:	0f 92       	push	r0
-    75e8:	0f b6       	in	r0, 0x3f	; 63
-    75ea:	0f 92       	push	r0
-    75ec:	11 24       	eor	r1, r1
-    75ee:	2f 93       	push	r18
-    75f0:	3f 93       	push	r19
-    75f2:	4f 93       	push	r20
-    75f4:	5f 93       	push	r21
-    75f6:	6f 93       	push	r22
-    75f8:	7f 93       	push	r23
-    75fa:	8f 93       	push	r24
-    75fc:	9f 93       	push	r25
-    75fe:	af 93       	push	r26
-    7600:	bf 93       	push	r27
-    7602:	ef 93       	push	r30
-    7604:	ff 93       	push	r31
+    75fc:	1f 92       	push	r1
+    75fe:	0f 92       	push	r0
+    7600:	0f b6       	in	r0, 0x3f	; 63
+    7602:	0f 92       	push	r0
+    7604:	11 24       	eor	r1, r1
+    7606:	2f 93       	push	r18
+    7608:	3f 93       	push	r19
+    760a:	4f 93       	push	r20
+    760c:	5f 93       	push	r21
+    760e:	6f 93       	push	r22
+    7610:	7f 93       	push	r23
+    7612:	8f 93       	push	r24
+    7614:	9f 93       	push	r25
+    7616:	af 93       	push	r26
+    7618:	bf 93       	push	r27
+    761a:	ef 93       	push	r30
+    761c:	ff 93       	push	r31
 
 	counter++;
-    7606:	80 91 99 00 	lds	r24, 0x0099	; 0x800099 <counter>
-    760a:	8f 5f       	subi	r24, 0xFF	; 255
-    760c:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <counter>
+    761e:	80 91 99 00 	lds	r24, 0x0099	; 0x800099 <counter>
+    7622:	8f 5f       	subi	r24, 0xFF	; 255
+    7624:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <counter>
 
 	MCP2515_receiveMesg(&RecievedMesg);
-    7610:	8b e8       	ldi	r24, 0x8B	; 139
-    7612:	90 e0       	ldi	r25, 0x00	; 0
-    7614:	0e 94 f6 3c 	call	0x79ec	; 0x79ec <MCP2515_receiveMesg>
-	
+    7628:	8b e8       	ldi	r24, 0x8B	; 139
+    762a:	90 e0       	ldi	r25, 0x00	; 0
+    762c:	0e 94 15 3d 	call	0x7a2a	; 0x7a2a <MCP2515_receiveMesg>
+	eeprom_write_block(RecievedMesg.MesgData ,eepromadd ,8 );
+    7630:	60 91 89 00 	lds	r22, 0x0089	; 0x800089 <eepromadd>
+    7634:	70 91 8a 00 	lds	r23, 0x008A	; 0x80008a <eepromadd+0x1>
+    7638:	48 e0       	ldi	r20, 0x08	; 8
+    763a:	50 e0       	ldi	r21, 0x00	; 0
+    763c:	80 e9       	ldi	r24, 0x90	; 144
+    763e:	90 e0       	ldi	r25, 0x00	; 0
+    7640:	0e 94 ce 3d 	call	0x7b9c	; 0x7b9c <eeprom_write_block>
+	eepromadd += 8;
+    7644:	80 91 89 00 	lds	r24, 0x0089	; 0x800089 <eepromadd>
+    7648:	90 91 8a 00 	lds	r25, 0x008A	; 0x80008a <eepromadd+0x1>
+    764c:	08 96       	adiw	r24, 0x08	; 8
+    764e:	90 93 8a 00 	sts	0x008A, r25	; 0x80008a <eepromadd+0x1>
+    7652:	80 93 89 00 	sts	0x0089, r24	; 0x800089 <eepromadd>
 	PORTD = 0x80;
-    7618:	80 e8       	ldi	r24, 0x80	; 128
-    761a:	82 bb       	out	0x12, r24	; 18
+    7656:	80 e8       	ldi	r24, 0x80	; 128
+    7658:	82 bb       	out	0x12, r24	; 18
 
-    761c:	ff 91       	pop	r31
-    761e:	ef 91       	pop	r30
-    7620:	bf 91       	pop	r27
-    7622:	af 91       	pop	r26
-    7624:	9f 91       	pop	r25
-    7626:	8f 91       	pop	r24
-    7628:	7f 91       	pop	r23
-    762a:	6f 91       	pop	r22
-    762c:	5f 91       	pop	r21
-    762e:	4f 91       	pop	r20
-    7630:	3f 91       	pop	r19
-    7632:	2f 91       	pop	r18
-    7634:	0f 90       	pop	r0
-    7636:	0f be       	out	0x3f, r0	; 63
-    7638:	0f 90       	pop	r0
-    763a:	1f 90       	pop	r1
-    763c:	18 95       	reti
+    765a:	ff 91       	pop	r31
+    765c:	ef 91       	pop	r30
+    765e:	bf 91       	pop	r27
+    7660:	af 91       	pop	r26
+    7662:	9f 91       	pop	r25
+    7664:	8f 91       	pop	r24
+    7666:	7f 91       	pop	r23
+    7668:	6f 91       	pop	r22
+    766a:	5f 91       	pop	r21
+    766c:	4f 91       	pop	r20
+    766e:	3f 91       	pop	r19
+    7670:	2f 91       	pop	r18
+    7672:	0f 90       	pop	r0
+    7674:	0f be       	out	0x3f, r0	; 63
+    7676:	0f 90       	pop	r0
+    7678:	1f 90       	pop	r1
+    767a:	18 95       	reti
 
-0000763e <MCP2515_Read_Register>:
+0000767c <MCP2515_Read_Register>:
 	dataTx[0] = 0x81+TXnum;
 	HAL_SPI_Transmit(&MCP2515_SPIHandler,dataTx,1);
 	
 	
 	
 }/* END_FUN MCP2515_SendCANmsg() */
-    763e:	cf 93       	push	r28
-    7640:	df 93       	push	r29
-    7642:	00 d0       	rcall	.+0      	; 0x7644 <MCP2515_Read_Register+0x6>
-    7644:	1f 92       	push	r1
-    7646:	cd b7       	in	r28, 0x3d	; 61
-    7648:	de b7       	in	r29, 0x3e	; 62
-    764a:	93 e0       	ldi	r25, 0x03	; 3
-    764c:	99 83       	std	Y+1, r25	; 0x01
-    764e:	8a 83       	std	Y+2, r24	; 0x02
-    7650:	1b 82       	std	Y+3, r1	; 0x03
-    7652:	23 e0       	ldi	r18, 0x03	; 3
-    7654:	30 e0       	ldi	r19, 0x00	; 0
-    7656:	ae 01       	movw	r20, r28
-    7658:	4f 5f       	subi	r20, 0xFF	; 255
-    765a:	5f 4f       	sbci	r21, 0xFF	; 255
-    765c:	ba 01       	movw	r22, r20
-    765e:	8b e7       	ldi	r24, 0x7B	; 123
-    7660:	90 e0       	ldi	r25, 0x00	; 0
-    7662:	0e 94 47 39 	call	0x728e	; 0x728e <HAL_SPI_TransmitRecive>
-    7666:	8b 81       	ldd	r24, Y+3	; 0x03
-    7668:	0f 90       	pop	r0
-    766a:	0f 90       	pop	r0
-    766c:	0f 90       	pop	r0
-    766e:	df 91       	pop	r29
-    7670:	cf 91       	pop	r28
-    7672:	08 95       	ret
+    767c:	cf 93       	push	r28
+    767e:	df 93       	push	r29
+    7680:	00 d0       	rcall	.+0      	; 0x7682 <MCP2515_Read_Register+0x6>
+    7682:	1f 92       	push	r1
+    7684:	cd b7       	in	r28, 0x3d	; 61
+    7686:	de b7       	in	r29, 0x3e	; 62
+    7688:	93 e0       	ldi	r25, 0x03	; 3
+    768a:	99 83       	std	Y+1, r25	; 0x01
+    768c:	8a 83       	std	Y+2, r24	; 0x02
+    768e:	1b 82       	std	Y+3, r1	; 0x03
+    7690:	23 e0       	ldi	r18, 0x03	; 3
+    7692:	30 e0       	ldi	r19, 0x00	; 0
+    7694:	ae 01       	movw	r20, r28
+    7696:	4f 5f       	subi	r20, 0xFF	; 255
+    7698:	5f 4f       	sbci	r21, 0xFF	; 255
+    769a:	ba 01       	movw	r22, r20
+    769c:	8b e7       	ldi	r24, 0x7B	; 123
+    769e:	90 e0       	ldi	r25, 0x00	; 0
+    76a0:	0e 94 47 39 	call	0x728e	; 0x728e <HAL_SPI_TransmitRecive>
+    76a4:	8b 81       	ldd	r24, Y+3	; 0x03
+    76a6:	0f 90       	pop	r0
+    76a8:	0f 90       	pop	r0
+    76aa:	0f 90       	pop	r0
+    76ac:	df 91       	pop	r29
+    76ae:	cf 91       	pop	r28
+    76b0:	08 95       	ret
 
-00007674 <MCP2515_Write_Register>:
-    7674:	cf 93       	push	r28
-    7676:	df 93       	push	r29
-    7678:	00 d0       	rcall	.+0      	; 0x767a <MCP2515_Write_Register+0x6>
-    767a:	1f 92       	push	r1
-    767c:	cd b7       	in	r28, 0x3d	; 61
-    767e:	de b7       	in	r29, 0x3e	; 62
-    7680:	92 e0       	ldi	r25, 0x02	; 2
-    7682:	99 83       	std	Y+1, r25	; 0x01
-    7684:	8a 83       	std	Y+2, r24	; 0x02
-    7686:	6b 83       	std	Y+3, r22	; 0x03
-    7688:	43 e0       	ldi	r20, 0x03	; 3
-    768a:	50 e0       	ldi	r21, 0x00	; 0
-    768c:	be 01       	movw	r22, r28
-    768e:	6f 5f       	subi	r22, 0xFF	; 255
-    7690:	7f 4f       	sbci	r23, 0xFF	; 255
-    7692:	8b e7       	ldi	r24, 0x7B	; 123
-    7694:	90 e0       	ldi	r25, 0x00	; 0
-    7696:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
-    769a:	0f 90       	pop	r0
-    769c:	0f 90       	pop	r0
-    769e:	0f 90       	pop	r0
-    76a0:	df 91       	pop	r29
-    76a2:	cf 91       	pop	r28
-    76a4:	08 95       	ret
-
-000076a6 <MCP2515_Rest>:
-    76a6:	cf 93       	push	r28
-    76a8:	df 93       	push	r29
-    76aa:	1f 92       	push	r1
-    76ac:	cd b7       	in	r28, 0x3d	; 61
-    76ae:	de b7       	in	r29, 0x3e	; 62
-    76b0:	80 ec       	ldi	r24, 0xC0	; 192
-    76b2:	89 83       	std	Y+1, r24	; 0x01
-    76b4:	41 e0       	ldi	r20, 0x01	; 1
-    76b6:	50 e0       	ldi	r21, 0x00	; 0
-    76b8:	be 01       	movw	r22, r28
-    76ba:	6f 5f       	subi	r22, 0xFF	; 255
-    76bc:	7f 4f       	sbci	r23, 0xFF	; 255
-    76be:	8b e7       	ldi	r24, 0x7B	; 123
-    76c0:	90 e0       	ldi	r25, 0x00	; 0
-    76c2:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
-    76c6:	2f ef       	ldi	r18, 0xFF	; 255
-    76c8:	89 ef       	ldi	r24, 0xF9	; 249
-    76ca:	90 e0       	ldi	r25, 0x00	; 0
-    76cc:	21 50       	subi	r18, 0x01	; 1
-    76ce:	80 40       	sbci	r24, 0x00	; 0
-    76d0:	90 40       	sbci	r25, 0x00	; 0
-    76d2:	e1 f7       	brne	.-8      	; 0x76cc <MCP2515_Rest+0x26>
-    76d4:	00 c0       	rjmp	.+0      	; 0x76d6 <MCP2515_Rest+0x30>
-    76d6:	00 00       	nop
+000076b2 <MCP2515_Write_Register>:
+    76b2:	cf 93       	push	r28
+    76b4:	df 93       	push	r29
+    76b6:	00 d0       	rcall	.+0      	; 0x76b8 <MCP2515_Write_Register+0x6>
+    76b8:	1f 92       	push	r1
+    76ba:	cd b7       	in	r28, 0x3d	; 61
+    76bc:	de b7       	in	r29, 0x3e	; 62
+    76be:	92 e0       	ldi	r25, 0x02	; 2
+    76c0:	99 83       	std	Y+1, r25	; 0x01
+    76c2:	8a 83       	std	Y+2, r24	; 0x02
+    76c4:	6b 83       	std	Y+3, r22	; 0x03
+    76c6:	43 e0       	ldi	r20, 0x03	; 3
+    76c8:	50 e0       	ldi	r21, 0x00	; 0
+    76ca:	be 01       	movw	r22, r28
+    76cc:	6f 5f       	subi	r22, 0xFF	; 255
+    76ce:	7f 4f       	sbci	r23, 0xFF	; 255
+    76d0:	8b e7       	ldi	r24, 0x7B	; 123
+    76d2:	90 e0       	ldi	r25, 0x00	; 0
+    76d4:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
     76d8:	0f 90       	pop	r0
-    76da:	df 91       	pop	r29
-    76dc:	cf 91       	pop	r28
-    76de:	08 95       	ret
+    76da:	0f 90       	pop	r0
+    76dc:	0f 90       	pop	r0
+    76de:	df 91       	pop	r29
+    76e0:	cf 91       	pop	r28
+    76e2:	08 95       	ret
 
-000076e0 <MCP2515_SetBitTiming>:
-    76e0:	cf 93       	push	r28
-    76e2:	df 93       	push	r29
-    76e4:	d6 2f       	mov	r29, r22
-    76e6:	c4 2f       	mov	r28, r20
-    76e8:	68 2f       	mov	r22, r24
-    76ea:	8a e2       	ldi	r24, 0x2A	; 42
-    76ec:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    76f0:	6d 2f       	mov	r22, r29
-    76f2:	89 e2       	ldi	r24, 0x29	; 41
-    76f4:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    76f8:	6c 2f       	mov	r22, r28
-    76fa:	88 e2       	ldi	r24, 0x28	; 40
-    76fc:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    7700:	df 91       	pop	r29
-    7702:	cf 91       	pop	r28
-    7704:	08 95       	ret
+000076e4 <MCP2515_Rest>:
+    76e4:	cf 93       	push	r28
+    76e6:	df 93       	push	r29
+    76e8:	1f 92       	push	r1
+    76ea:	cd b7       	in	r28, 0x3d	; 61
+    76ec:	de b7       	in	r29, 0x3e	; 62
+    76ee:	80 ec       	ldi	r24, 0xC0	; 192
+    76f0:	89 83       	std	Y+1, r24	; 0x01
+    76f2:	41 e0       	ldi	r20, 0x01	; 1
+    76f4:	50 e0       	ldi	r21, 0x00	; 0
+    76f6:	be 01       	movw	r22, r28
+    76f8:	6f 5f       	subi	r22, 0xFF	; 255
+    76fa:	7f 4f       	sbci	r23, 0xFF	; 255
+    76fc:	8b e7       	ldi	r24, 0x7B	; 123
+    76fe:	90 e0       	ldi	r25, 0x00	; 0
+    7700:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
+    7704:	2f ef       	ldi	r18, 0xFF	; 255
+    7706:	89 ef       	ldi	r24, 0xF9	; 249
+    7708:	90 e0       	ldi	r25, 0x00	; 0
+    770a:	21 50       	subi	r18, 0x01	; 1
+    770c:	80 40       	sbci	r24, 0x00	; 0
+    770e:	90 40       	sbci	r25, 0x00	; 0
+    7710:	e1 f7       	brne	.-8      	; 0x770a <MCP2515_Rest+0x26>
+    7712:	00 c0       	rjmp	.+0      	; 0x7714 <MCP2515_Rest+0x30>
+    7714:	00 00       	nop
+    7716:	0f 90       	pop	r0
+    7718:	df 91       	pop	r29
+    771a:	cf 91       	pop	r28
+    771c:	08 95       	ret
 
-00007706 <MCP2515_Set_OperMode>:
-    7706:	cf 93       	push	r28
-    7708:	df 93       	push	r29
-    770a:	00 d0       	rcall	.+0      	; 0x770c <MCP2515_Set_OperMode+0x6>
-    770c:	1f 92       	push	r1
-    770e:	cd b7       	in	r28, 0x3d	; 61
-    7710:	de b7       	in	r29, 0x3e	; 62
-    7712:	92 e0       	ldi	r25, 0x02	; 2
-    7714:	99 83       	std	Y+1, r25	; 0x01
-    7716:	9f e0       	ldi	r25, 0x0F	; 15
-    7718:	9a 83       	std	Y+2, r25	; 0x02
-    771a:	8b 83       	std	Y+3, r24	; 0x03
-    771c:	43 e0       	ldi	r20, 0x03	; 3
-    771e:	50 e0       	ldi	r21, 0x00	; 0
-    7720:	be 01       	movw	r22, r28
-    7722:	6f 5f       	subi	r22, 0xFF	; 255
-    7724:	7f 4f       	sbci	r23, 0xFF	; 255
-    7726:	8b e7       	ldi	r24, 0x7B	; 123
-    7728:	90 e0       	ldi	r25, 0x00	; 0
-    772a:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
-    772e:	0f 90       	pop	r0
-    7730:	0f 90       	pop	r0
-    7732:	0f 90       	pop	r0
-    7734:	df 91       	pop	r29
-    7736:	cf 91       	pop	r28
-    7738:	08 95       	ret
+0000771e <MCP2515_SetBitTiming>:
+    771e:	cf 93       	push	r28
+    7720:	df 93       	push	r29
+    7722:	d6 2f       	mov	r29, r22
+    7724:	c4 2f       	mov	r28, r20
+    7726:	68 2f       	mov	r22, r24
+    7728:	8a e2       	ldi	r24, 0x2A	; 42
+    772a:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    772e:	6d 2f       	mov	r22, r29
+    7730:	89 e2       	ldi	r24, 0x29	; 41
+    7732:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    7736:	6c 2f       	mov	r22, r28
+    7738:	88 e2       	ldi	r24, 0x28	; 40
+    773a:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    773e:	df 91       	pop	r29
+    7740:	cf 91       	pop	r28
+    7742:	08 95       	ret
 
-0000773a <MCP2515_SetMask>:
-    773a:	cf 92       	push	r12
-    773c:	df 92       	push	r13
-    773e:	ef 92       	push	r14
-    7740:	ff 92       	push	r15
-    7742:	cf 93       	push	r28
-    7744:	c8 2f       	mov	r28, r24
-    7746:	6a 01       	movw	r12, r20
-    7748:	7b 01       	movw	r14, r22
-    774a:	22 23       	and	r18, r18
-    774c:	09 f4       	brne	.+2      	; 0x7750 <MCP2515_SetMask+0x16>
-    774e:	4a c0       	rjmp	.+148    	; 0x77e4 <MCP2515_SetMask+0xaa>
-    7750:	cb 01       	movw	r24, r22
-    7752:	ba 01       	movw	r22, r20
-    7754:	68 94       	set
-    7756:	12 f8       	bld	r1, 2
-    7758:	96 95       	lsr	r25
-    775a:	87 95       	ror	r24
-    775c:	77 95       	ror	r23
-    775e:	67 95       	ror	r22
-    7760:	16 94       	lsr	r1
-    7762:	d1 f7       	brne	.-12     	; 0x7758 <MCP2515_SetMask+0x1e>
-    7764:	2c 2f       	mov	r18, r28
-    7766:	30 e0       	ldi	r19, 0x00	; 0
-    7768:	28 5f       	subi	r18, 0xF8	; 248
-    776a:	3f 4f       	sbci	r19, 0xFF	; 255
-    776c:	82 2f       	mov	r24, r18
-    776e:	88 0f       	add	r24, r24
-    7770:	88 0f       	add	r24, r24
-    7772:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    7776:	d7 01       	movw	r26, r14
-    7778:	c6 01       	movw	r24, r12
-    777a:	07 2e       	mov	r0, r23
-    777c:	7b e1       	ldi	r23, 0x1B	; 27
-    777e:	b6 95       	lsr	r27
-    7780:	a7 95       	ror	r26
-    7782:	97 95       	ror	r25
-    7784:	87 95       	ror	r24
-    7786:	7a 95       	dec	r23
-    7788:	d1 f7       	brne	.-12     	; 0x777e <MCP2515_SetMask+0x44>
-    778a:	70 2d       	mov	r23, r0
-    778c:	cc 0f       	add	r28, r28
-    778e:	cc 0f       	add	r28, r28
-    7790:	6c 2d       	mov	r22, r12
-    7792:	62 95       	swap	r22
-    7794:	66 0f       	add	r22, r22
-    7796:	60 7e       	andi	r22, 0xE0	; 224
-    7798:	86 2b       	or	r24, r22
-    779a:	68 2f       	mov	r22, r24
-    779c:	68 60       	ori	r22, 0x08	; 8
-    779e:	81 e2       	ldi	r24, 0x21	; 33
-    77a0:	8c 0f       	add	r24, r28
-    77a2:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    77a6:	c7 01       	movw	r24, r14
-    77a8:	b6 01       	movw	r22, r12
-    77aa:	05 2e       	mov	r0, r21
-    77ac:	5b e0       	ldi	r21, 0x0B	; 11
-    77ae:	96 95       	lsr	r25
-    77b0:	87 95       	ror	r24
-    77b2:	77 95       	ror	r23
-    77b4:	67 95       	ror	r22
-    77b6:	5a 95       	dec	r21
-    77b8:	d1 f7       	brne	.-12     	; 0x77ae <MCP2515_SetMask+0x74>
-    77ba:	50 2d       	mov	r21, r0
-    77bc:	83 e2       	ldi	r24, 0x23	; 35
-    77be:	8c 0f       	add	r24, r28
-    77c0:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    77c4:	c7 01       	movw	r24, r14
-    77c6:	b6 01       	movw	r22, r12
-    77c8:	05 2e       	mov	r0, r21
-    77ca:	53 e1       	ldi	r21, 0x13	; 19
-    77cc:	96 95       	lsr	r25
-    77ce:	87 95       	ror	r24
-    77d0:	77 95       	ror	r23
-    77d2:	67 95       	ror	r22
-    77d4:	5a 95       	dec	r21
-    77d6:	d1 f7       	brne	.-12     	; 0x77cc <MCP2515_SetMask+0x92>
-    77d8:	50 2d       	mov	r21, r0
-    77da:	82 e2       	ldi	r24, 0x22	; 34
-    77dc:	8c 0f       	add	r24, r28
-    77de:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    77e2:	1d c0       	rjmp	.+58     	; 0x781e <MCP2515_SetMask+0xe4>
-    77e4:	cb 01       	movw	r24, r22
-    77e6:	ba 01       	movw	r22, r20
-    77e8:	68 94       	set
-    77ea:	12 f8       	bld	r1, 2
+00007744 <MCP2515_Set_OperMode>:
+    7744:	cf 93       	push	r28
+    7746:	df 93       	push	r29
+    7748:	00 d0       	rcall	.+0      	; 0x774a <MCP2515_Set_OperMode+0x6>
+    774a:	1f 92       	push	r1
+    774c:	cd b7       	in	r28, 0x3d	; 61
+    774e:	de b7       	in	r29, 0x3e	; 62
+    7750:	92 e0       	ldi	r25, 0x02	; 2
+    7752:	99 83       	std	Y+1, r25	; 0x01
+    7754:	9f e0       	ldi	r25, 0x0F	; 15
+    7756:	9a 83       	std	Y+2, r25	; 0x02
+    7758:	8b 83       	std	Y+3, r24	; 0x03
+    775a:	43 e0       	ldi	r20, 0x03	; 3
+    775c:	50 e0       	ldi	r21, 0x00	; 0
+    775e:	be 01       	movw	r22, r28
+    7760:	6f 5f       	subi	r22, 0xFF	; 255
+    7762:	7f 4f       	sbci	r23, 0xFF	; 255
+    7764:	8b e7       	ldi	r24, 0x7B	; 123
+    7766:	90 e0       	ldi	r25, 0x00	; 0
+    7768:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
+    776c:	0f 90       	pop	r0
+    776e:	0f 90       	pop	r0
+    7770:	0f 90       	pop	r0
+    7772:	df 91       	pop	r29
+    7774:	cf 91       	pop	r28
+    7776:	08 95       	ret
+
+00007778 <MCP2515_SetMask>:
+    7778:	cf 92       	push	r12
+    777a:	df 92       	push	r13
+    777c:	ef 92       	push	r14
+    777e:	ff 92       	push	r15
+    7780:	cf 93       	push	r28
+    7782:	c8 2f       	mov	r28, r24
+    7784:	6a 01       	movw	r12, r20
+    7786:	7b 01       	movw	r14, r22
+    7788:	22 23       	and	r18, r18
+    778a:	09 f4       	brne	.+2      	; 0x778e <MCP2515_SetMask+0x16>
+    778c:	4a c0       	rjmp	.+148    	; 0x7822 <MCP2515_SetMask+0xaa>
+    778e:	cb 01       	movw	r24, r22
+    7790:	ba 01       	movw	r22, r20
+    7792:	68 94       	set
+    7794:	12 f8       	bld	r1, 2
+    7796:	96 95       	lsr	r25
+    7798:	87 95       	ror	r24
+    779a:	77 95       	ror	r23
+    779c:	67 95       	ror	r22
+    779e:	16 94       	lsr	r1
+    77a0:	d1 f7       	brne	.-12     	; 0x7796 <MCP2515_SetMask+0x1e>
+    77a2:	2c 2f       	mov	r18, r28
+    77a4:	30 e0       	ldi	r19, 0x00	; 0
+    77a6:	28 5f       	subi	r18, 0xF8	; 248
+    77a8:	3f 4f       	sbci	r19, 0xFF	; 255
+    77aa:	82 2f       	mov	r24, r18
+    77ac:	88 0f       	add	r24, r24
+    77ae:	88 0f       	add	r24, r24
+    77b0:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    77b4:	d7 01       	movw	r26, r14
+    77b6:	c6 01       	movw	r24, r12
+    77b8:	07 2e       	mov	r0, r23
+    77ba:	7b e1       	ldi	r23, 0x1B	; 27
+    77bc:	b6 95       	lsr	r27
+    77be:	a7 95       	ror	r26
+    77c0:	97 95       	ror	r25
+    77c2:	87 95       	ror	r24
+    77c4:	7a 95       	dec	r23
+    77c6:	d1 f7       	brne	.-12     	; 0x77bc <MCP2515_SetMask+0x44>
+    77c8:	70 2d       	mov	r23, r0
+    77ca:	cc 0f       	add	r28, r28
+    77cc:	cc 0f       	add	r28, r28
+    77ce:	6c 2d       	mov	r22, r12
+    77d0:	62 95       	swap	r22
+    77d2:	66 0f       	add	r22, r22
+    77d4:	60 7e       	andi	r22, 0xE0	; 224
+    77d6:	86 2b       	or	r24, r22
+    77d8:	68 2f       	mov	r22, r24
+    77da:	68 60       	ori	r22, 0x08	; 8
+    77dc:	81 e2       	ldi	r24, 0x21	; 33
+    77de:	8c 0f       	add	r24, r28
+    77e0:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    77e4:	c7 01       	movw	r24, r14
+    77e6:	b6 01       	movw	r22, r12
+    77e8:	05 2e       	mov	r0, r21
+    77ea:	5b e0       	ldi	r21, 0x0B	; 11
     77ec:	96 95       	lsr	r25
     77ee:	87 95       	ror	r24
     77f0:	77 95       	ror	r23
     77f2:	67 95       	ror	r22
-    77f4:	16 94       	lsr	r1
-    77f6:	d1 f7       	brne	.-12     	; 0x77ec <MCP2515_SetMask+0xb2>
-    77f8:	2c 2f       	mov	r18, r28
-    77fa:	30 e0       	ldi	r19, 0x00	; 0
-    77fc:	28 5f       	subi	r18, 0xF8	; 248
-    77fe:	3f 4f       	sbci	r19, 0xFF	; 255
-    7800:	82 2f       	mov	r24, r18
-    7802:	88 0f       	add	r24, r24
-    7804:	88 0f       	add	r24, r24
-    7806:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    780a:	6c 2d       	mov	r22, r12
-    780c:	62 95       	swap	r22
-    780e:	66 0f       	add	r22, r22
-    7810:	60 7e       	andi	r22, 0xE0	; 224
-    7812:	8c 2f       	mov	r24, r28
-    7814:	88 0f       	add	r24, r24
-    7816:	88 0f       	add	r24, r24
-    7818:	8f 5d       	subi	r24, 0xDF	; 223
-    781a:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    781e:	cf 91       	pop	r28
-    7820:	ff 90       	pop	r15
-    7822:	ef 90       	pop	r14
-    7824:	df 90       	pop	r13
-    7826:	cf 90       	pop	r12
-    7828:	08 95       	ret
+    77f4:	5a 95       	dec	r21
+    77f6:	d1 f7       	brne	.-12     	; 0x77ec <MCP2515_SetMask+0x74>
+    77f8:	50 2d       	mov	r21, r0
+    77fa:	83 e2       	ldi	r24, 0x23	; 35
+    77fc:	8c 0f       	add	r24, r28
+    77fe:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    7802:	c7 01       	movw	r24, r14
+    7804:	b6 01       	movw	r22, r12
+    7806:	05 2e       	mov	r0, r21
+    7808:	53 e1       	ldi	r21, 0x13	; 19
+    780a:	96 95       	lsr	r25
+    780c:	87 95       	ror	r24
+    780e:	77 95       	ror	r23
+    7810:	67 95       	ror	r22
+    7812:	5a 95       	dec	r21
+    7814:	d1 f7       	brne	.-12     	; 0x780a <MCP2515_SetMask+0x92>
+    7816:	50 2d       	mov	r21, r0
+    7818:	82 e2       	ldi	r24, 0x22	; 34
+    781a:	8c 0f       	add	r24, r28
+    781c:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    7820:	1d c0       	rjmp	.+58     	; 0x785c <MCP2515_SetMask+0xe4>
+    7822:	cb 01       	movw	r24, r22
+    7824:	ba 01       	movw	r22, r20
+    7826:	68 94       	set
+    7828:	12 f8       	bld	r1, 2
+    782a:	96 95       	lsr	r25
+    782c:	87 95       	ror	r24
+    782e:	77 95       	ror	r23
+    7830:	67 95       	ror	r22
+    7832:	16 94       	lsr	r1
+    7834:	d1 f7       	brne	.-12     	; 0x782a <MCP2515_SetMask+0xb2>
+    7836:	2c 2f       	mov	r18, r28
+    7838:	30 e0       	ldi	r19, 0x00	; 0
+    783a:	28 5f       	subi	r18, 0xF8	; 248
+    783c:	3f 4f       	sbci	r19, 0xFF	; 255
+    783e:	82 2f       	mov	r24, r18
+    7840:	88 0f       	add	r24, r24
+    7842:	88 0f       	add	r24, r24
+    7844:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    7848:	6c 2d       	mov	r22, r12
+    784a:	62 95       	swap	r22
+    784c:	66 0f       	add	r22, r22
+    784e:	60 7e       	andi	r22, 0xE0	; 224
+    7850:	8c 2f       	mov	r24, r28
+    7852:	88 0f       	add	r24, r24
+    7854:	88 0f       	add	r24, r24
+    7856:	8f 5d       	subi	r24, 0xDF	; 223
+    7858:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    785c:	cf 91       	pop	r28
+    785e:	ff 90       	pop	r15
+    7860:	ef 90       	pop	r14
+    7862:	df 90       	pop	r13
+    7864:	cf 90       	pop	r12
+    7866:	08 95       	ret
 
-0000782a <MCP2515_SetFilter>:
-    782a:	cf 92       	push	r12
-    782c:	df 92       	push	r13
-    782e:	ef 92       	push	r14
-    7830:	ff 92       	push	r15
-    7832:	cf 93       	push	r28
-    7834:	df 93       	push	r29
-    7836:	c8 2f       	mov	r28, r24
-    7838:	6a 01       	movw	r12, r20
-    783a:	7b 01       	movw	r14, r22
-    783c:	22 23       	and	r18, r18
-    783e:	09 f4       	brne	.+2      	; 0x7842 <MCP2515_SetFilter+0x18>
-    7840:	5c c0       	rjmp	.+184    	; 0x78fa <MCP2515_SetFilter+0xd0>
-    7842:	cb 01       	movw	r24, r22
-    7844:	ba 01       	movw	r22, r20
-    7846:	68 94       	set
-    7848:	12 f8       	bld	r1, 2
-    784a:	96 95       	lsr	r25
-    784c:	87 95       	ror	r24
-    784e:	77 95       	ror	r23
-    7850:	67 95       	ror	r22
-    7852:	16 94       	lsr	r1
-    7854:	d1 f7       	brne	.-12     	; 0x784a <MCP2515_SetFilter+0x20>
-    7856:	dc 2f       	mov	r29, r28
-    7858:	dd 0f       	add	r29, r29
-    785a:	dd 0f       	add	r29, r29
-    785c:	c3 30       	cpi	r28, 0x03	; 3
-    785e:	10 f0       	brcs	.+4      	; 0x7864 <MCP2515_SetFilter+0x3a>
-    7860:	24 e0       	ldi	r18, 0x04	; 4
-    7862:	01 c0       	rjmp	.+2      	; 0x7866 <MCP2515_SetFilter+0x3c>
-    7864:	20 e0       	ldi	r18, 0x00	; 0
-    7866:	82 2f       	mov	r24, r18
-    7868:	8d 0f       	add	r24, r29
-    786a:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    786e:	8c 2d       	mov	r24, r12
-    7870:	82 95       	swap	r24
-    7872:	88 0f       	add	r24, r24
-    7874:	80 7e       	andi	r24, 0xE0	; 224
-    7876:	b7 01       	movw	r22, r14
-    7878:	a6 01       	movw	r20, r12
-    787a:	03 2e       	mov	r0, r19
-    787c:	3b e1       	ldi	r19, 0x1B	; 27
-    787e:	76 95       	lsr	r23
-    7880:	67 95       	ror	r22
-    7882:	57 95       	ror	r21
-    7884:	47 95       	ror	r20
-    7886:	3a 95       	dec	r19
-    7888:	d1 f7       	brne	.-12     	; 0x787e <MCP2515_SetFilter+0x54>
-    788a:	30 2d       	mov	r19, r0
-    788c:	48 2b       	or	r20, r24
-    788e:	64 2f       	mov	r22, r20
-    7890:	68 60       	ori	r22, 0x08	; 8
-    7892:	c3 30       	cpi	r28, 0x03	; 3
-    7894:	10 f0       	brcs	.+4      	; 0x789a <MCP2515_SetFilter+0x70>
-    7896:	84 e0       	ldi	r24, 0x04	; 4
-    7898:	01 c0       	rjmp	.+2      	; 0x789c <MCP2515_SetFilter+0x72>
-    789a:	80 e0       	ldi	r24, 0x00	; 0
-    789c:	8d 0f       	add	r24, r29
-    789e:	8f 5f       	subi	r24, 0xFF	; 255
-    78a0:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    78a4:	c7 01       	movw	r24, r14
-    78a6:	b6 01       	movw	r22, r12
-    78a8:	05 2e       	mov	r0, r21
-    78aa:	5b e0       	ldi	r21, 0x0B	; 11
-    78ac:	96 95       	lsr	r25
-    78ae:	87 95       	ror	r24
-    78b0:	77 95       	ror	r23
-    78b2:	67 95       	ror	r22
-    78b4:	5a 95       	dec	r21
-    78b6:	d1 f7       	brne	.-12     	; 0x78ac <MCP2515_SetFilter+0x82>
-    78b8:	50 2d       	mov	r21, r0
-    78ba:	c3 30       	cpi	r28, 0x03	; 3
-    78bc:	10 f0       	brcs	.+4      	; 0x78c2 <MCP2515_SetFilter+0x98>
-    78be:	24 e0       	ldi	r18, 0x04	; 4
-    78c0:	01 c0       	rjmp	.+2      	; 0x78c4 <MCP2515_SetFilter+0x9a>
-    78c2:	20 e0       	ldi	r18, 0x00	; 0
-    78c4:	2d 0f       	add	r18, r29
-    78c6:	83 e0       	ldi	r24, 0x03	; 3
-    78c8:	82 0f       	add	r24, r18
-    78ca:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    78ce:	c7 01       	movw	r24, r14
-    78d0:	b6 01       	movw	r22, r12
-    78d2:	05 2e       	mov	r0, r21
-    78d4:	53 e1       	ldi	r21, 0x13	; 19
-    78d6:	96 95       	lsr	r25
-    78d8:	87 95       	ror	r24
-    78da:	77 95       	ror	r23
-    78dc:	67 95       	ror	r22
-    78de:	5a 95       	dec	r21
-    78e0:	d1 f7       	brne	.-12     	; 0x78d6 <MCP2515_SetFilter+0xac>
-    78e2:	50 2d       	mov	r21, r0
-    78e4:	c3 30       	cpi	r28, 0x03	; 3
-    78e6:	10 f0       	brcs	.+4      	; 0x78ec <MCP2515_SetFilter+0xc2>
-    78e8:	24 e0       	ldi	r18, 0x04	; 4
-    78ea:	01 c0       	rjmp	.+2      	; 0x78ee <MCP2515_SetFilter+0xc4>
-    78ec:	20 e0       	ldi	r18, 0x00	; 0
-    78ee:	2d 0f       	add	r18, r29
-    78f0:	82 e0       	ldi	r24, 0x02	; 2
-    78f2:	82 0f       	add	r24, r18
-    78f4:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    78f8:	23 c0       	rjmp	.+70     	; 0x7940 <MCP2515_SetFilter+0x116>
-    78fa:	cb 01       	movw	r24, r22
-    78fc:	ba 01       	movw	r22, r20
-    78fe:	68 94       	set
-    7900:	12 f8       	bld	r1, 2
-    7902:	96 95       	lsr	r25
-    7904:	87 95       	ror	r24
-    7906:	77 95       	ror	r23
-    7908:	67 95       	ror	r22
-    790a:	16 94       	lsr	r1
-    790c:	d1 f7       	brne	.-12     	; 0x7902 <MCP2515_SetFilter+0xd8>
-    790e:	dc 2f       	mov	r29, r28
-    7910:	dd 0f       	add	r29, r29
-    7912:	dd 0f       	add	r29, r29
-    7914:	c3 30       	cpi	r28, 0x03	; 3
-    7916:	10 f0       	brcs	.+4      	; 0x791c <MCP2515_SetFilter+0xf2>
-    7918:	24 e0       	ldi	r18, 0x04	; 4
-    791a:	01 c0       	rjmp	.+2      	; 0x791e <MCP2515_SetFilter+0xf4>
-    791c:	20 e0       	ldi	r18, 0x00	; 0
-    791e:	82 2f       	mov	r24, r18
-    7920:	8d 0f       	add	r24, r29
-    7922:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    7926:	6c 2d       	mov	r22, r12
-    7928:	62 95       	swap	r22
-    792a:	66 0f       	add	r22, r22
-    792c:	60 7e       	andi	r22, 0xE0	; 224
-    792e:	c3 30       	cpi	r28, 0x03	; 3
-    7930:	10 f0       	brcs	.+4      	; 0x7936 <MCP2515_SetFilter+0x10c>
-    7932:	84 e0       	ldi	r24, 0x04	; 4
-    7934:	01 c0       	rjmp	.+2      	; 0x7938 <MCP2515_SetFilter+0x10e>
-    7936:	80 e0       	ldi	r24, 0x00	; 0
-    7938:	8d 0f       	add	r24, r29
-    793a:	8f 5f       	subi	r24, 0xFF	; 255
-    793c:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    7940:	df 91       	pop	r29
-    7942:	cf 91       	pop	r28
-    7944:	ff 90       	pop	r15
-    7946:	ef 90       	pop	r14
-    7948:	df 90       	pop	r13
-    794a:	cf 90       	pop	r12
-    794c:	08 95       	ret
+00007868 <MCP2515_SetFilter>:
+    7868:	cf 92       	push	r12
+    786a:	df 92       	push	r13
+    786c:	ef 92       	push	r14
+    786e:	ff 92       	push	r15
+    7870:	cf 93       	push	r28
+    7872:	df 93       	push	r29
+    7874:	c8 2f       	mov	r28, r24
+    7876:	6a 01       	movw	r12, r20
+    7878:	7b 01       	movw	r14, r22
+    787a:	22 23       	and	r18, r18
+    787c:	09 f4       	brne	.+2      	; 0x7880 <MCP2515_SetFilter+0x18>
+    787e:	5c c0       	rjmp	.+184    	; 0x7938 <MCP2515_SetFilter+0xd0>
+    7880:	cb 01       	movw	r24, r22
+    7882:	ba 01       	movw	r22, r20
+    7884:	68 94       	set
+    7886:	12 f8       	bld	r1, 2
+    7888:	96 95       	lsr	r25
+    788a:	87 95       	ror	r24
+    788c:	77 95       	ror	r23
+    788e:	67 95       	ror	r22
+    7890:	16 94       	lsr	r1
+    7892:	d1 f7       	brne	.-12     	; 0x7888 <MCP2515_SetFilter+0x20>
+    7894:	dc 2f       	mov	r29, r28
+    7896:	dd 0f       	add	r29, r29
+    7898:	dd 0f       	add	r29, r29
+    789a:	c3 30       	cpi	r28, 0x03	; 3
+    789c:	10 f0       	brcs	.+4      	; 0x78a2 <MCP2515_SetFilter+0x3a>
+    789e:	24 e0       	ldi	r18, 0x04	; 4
+    78a0:	01 c0       	rjmp	.+2      	; 0x78a4 <MCP2515_SetFilter+0x3c>
+    78a2:	20 e0       	ldi	r18, 0x00	; 0
+    78a4:	82 2f       	mov	r24, r18
+    78a6:	8d 0f       	add	r24, r29
+    78a8:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    78ac:	8c 2d       	mov	r24, r12
+    78ae:	82 95       	swap	r24
+    78b0:	88 0f       	add	r24, r24
+    78b2:	80 7e       	andi	r24, 0xE0	; 224
+    78b4:	b7 01       	movw	r22, r14
+    78b6:	a6 01       	movw	r20, r12
+    78b8:	03 2e       	mov	r0, r19
+    78ba:	3b e1       	ldi	r19, 0x1B	; 27
+    78bc:	76 95       	lsr	r23
+    78be:	67 95       	ror	r22
+    78c0:	57 95       	ror	r21
+    78c2:	47 95       	ror	r20
+    78c4:	3a 95       	dec	r19
+    78c6:	d1 f7       	brne	.-12     	; 0x78bc <MCP2515_SetFilter+0x54>
+    78c8:	30 2d       	mov	r19, r0
+    78ca:	48 2b       	or	r20, r24
+    78cc:	64 2f       	mov	r22, r20
+    78ce:	68 60       	ori	r22, 0x08	; 8
+    78d0:	c3 30       	cpi	r28, 0x03	; 3
+    78d2:	10 f0       	brcs	.+4      	; 0x78d8 <MCP2515_SetFilter+0x70>
+    78d4:	84 e0       	ldi	r24, 0x04	; 4
+    78d6:	01 c0       	rjmp	.+2      	; 0x78da <MCP2515_SetFilter+0x72>
+    78d8:	80 e0       	ldi	r24, 0x00	; 0
+    78da:	8d 0f       	add	r24, r29
+    78dc:	8f 5f       	subi	r24, 0xFF	; 255
+    78de:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    78e2:	c7 01       	movw	r24, r14
+    78e4:	b6 01       	movw	r22, r12
+    78e6:	05 2e       	mov	r0, r21
+    78e8:	5b e0       	ldi	r21, 0x0B	; 11
+    78ea:	96 95       	lsr	r25
+    78ec:	87 95       	ror	r24
+    78ee:	77 95       	ror	r23
+    78f0:	67 95       	ror	r22
+    78f2:	5a 95       	dec	r21
+    78f4:	d1 f7       	brne	.-12     	; 0x78ea <MCP2515_SetFilter+0x82>
+    78f6:	50 2d       	mov	r21, r0
+    78f8:	c3 30       	cpi	r28, 0x03	; 3
+    78fa:	10 f0       	brcs	.+4      	; 0x7900 <MCP2515_SetFilter+0x98>
+    78fc:	24 e0       	ldi	r18, 0x04	; 4
+    78fe:	01 c0       	rjmp	.+2      	; 0x7902 <MCP2515_SetFilter+0x9a>
+    7900:	20 e0       	ldi	r18, 0x00	; 0
+    7902:	2d 0f       	add	r18, r29
+    7904:	83 e0       	ldi	r24, 0x03	; 3
+    7906:	82 0f       	add	r24, r18
+    7908:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    790c:	c7 01       	movw	r24, r14
+    790e:	b6 01       	movw	r22, r12
+    7910:	05 2e       	mov	r0, r21
+    7912:	53 e1       	ldi	r21, 0x13	; 19
+    7914:	96 95       	lsr	r25
+    7916:	87 95       	ror	r24
+    7918:	77 95       	ror	r23
+    791a:	67 95       	ror	r22
+    791c:	5a 95       	dec	r21
+    791e:	d1 f7       	brne	.-12     	; 0x7914 <MCP2515_SetFilter+0xac>
+    7920:	50 2d       	mov	r21, r0
+    7922:	c3 30       	cpi	r28, 0x03	; 3
+    7924:	10 f0       	brcs	.+4      	; 0x792a <MCP2515_SetFilter+0xc2>
+    7926:	24 e0       	ldi	r18, 0x04	; 4
+    7928:	01 c0       	rjmp	.+2      	; 0x792c <MCP2515_SetFilter+0xc4>
+    792a:	20 e0       	ldi	r18, 0x00	; 0
+    792c:	2d 0f       	add	r18, r29
+    792e:	82 e0       	ldi	r24, 0x02	; 2
+    7930:	82 0f       	add	r24, r18
+    7932:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    7936:	23 c0       	rjmp	.+70     	; 0x797e <MCP2515_SetFilter+0x116>
+    7938:	cb 01       	movw	r24, r22
+    793a:	ba 01       	movw	r22, r20
+    793c:	68 94       	set
+    793e:	12 f8       	bld	r1, 2
+    7940:	96 95       	lsr	r25
+    7942:	87 95       	ror	r24
+    7944:	77 95       	ror	r23
+    7946:	67 95       	ror	r22
+    7948:	16 94       	lsr	r1
+    794a:	d1 f7       	brne	.-12     	; 0x7940 <MCP2515_SetFilter+0xd8>
+    794c:	dc 2f       	mov	r29, r28
+    794e:	dd 0f       	add	r29, r29
+    7950:	dd 0f       	add	r29, r29
+    7952:	c3 30       	cpi	r28, 0x03	; 3
+    7954:	10 f0       	brcs	.+4      	; 0x795a <MCP2515_SetFilter+0xf2>
+    7956:	24 e0       	ldi	r18, 0x04	; 4
+    7958:	01 c0       	rjmp	.+2      	; 0x795c <MCP2515_SetFilter+0xf4>
+    795a:	20 e0       	ldi	r18, 0x00	; 0
+    795c:	82 2f       	mov	r24, r18
+    795e:	8d 0f       	add	r24, r29
+    7960:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    7964:	6c 2d       	mov	r22, r12
+    7966:	62 95       	swap	r22
+    7968:	66 0f       	add	r22, r22
+    796a:	60 7e       	andi	r22, 0xE0	; 224
+    796c:	c3 30       	cpi	r28, 0x03	; 3
+    796e:	10 f0       	brcs	.+4      	; 0x7974 <MCP2515_SetFilter+0x10c>
+    7970:	84 e0       	ldi	r24, 0x04	; 4
+    7972:	01 c0       	rjmp	.+2      	; 0x7976 <MCP2515_SetFilter+0x10e>
+    7974:	80 e0       	ldi	r24, 0x00	; 0
+    7976:	8d 0f       	add	r24, r29
+    7978:	8f 5f       	subi	r24, 0xFF	; 255
+    797a:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    797e:	df 91       	pop	r29
+    7980:	cf 91       	pop	r28
+    7982:	ff 90       	pop	r15
+    7984:	ef 90       	pop	r14
+    7986:	df 90       	pop	r13
+    7988:	cf 90       	pop	r12
+    798a:	08 95       	ret
 
-0000794e <MCP2515_Enable_Interrupt>:
-    794e:	cf 93       	push	r28
-    7950:	df 93       	push	r29
-    7952:	00 d0       	rcall	.+0      	; 0x7954 <MCP2515_Enable_Interrupt+0x6>
-    7954:	1f 92       	push	r1
-    7956:	cd b7       	in	r28, 0x3d	; 61
-    7958:	de b7       	in	r29, 0x3e	; 62
-    795a:	92 e0       	ldi	r25, 0x02	; 2
-    795c:	99 83       	std	Y+1, r25	; 0x01
-    795e:	9b e2       	ldi	r25, 0x2B	; 43
-    7960:	9a 83       	std	Y+2, r25	; 0x02
-    7962:	8b 83       	std	Y+3, r24	; 0x03
-    7964:	43 e0       	ldi	r20, 0x03	; 3
-    7966:	50 e0       	ldi	r21, 0x00	; 0
-    7968:	be 01       	movw	r22, r28
-    796a:	6f 5f       	subi	r22, 0xFF	; 255
-    796c:	7f 4f       	sbci	r23, 0xFF	; 255
-    796e:	8b e7       	ldi	r24, 0x7B	; 123
-    7970:	90 e0       	ldi	r25, 0x00	; 0
-    7972:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
-    7976:	0f 90       	pop	r0
-    7978:	0f 90       	pop	r0
-    797a:	0f 90       	pop	r0
-    797c:	df 91       	pop	r29
-    797e:	cf 91       	pop	r28
-    7980:	08 95       	ret
+0000798c <MCP2515_Enable_Interrupt>:
+    798c:	cf 93       	push	r28
+    798e:	df 93       	push	r29
+    7990:	00 d0       	rcall	.+0      	; 0x7992 <MCP2515_Enable_Interrupt+0x6>
+    7992:	1f 92       	push	r1
+    7994:	cd b7       	in	r28, 0x3d	; 61
+    7996:	de b7       	in	r29, 0x3e	; 62
+    7998:	92 e0       	ldi	r25, 0x02	; 2
+    799a:	99 83       	std	Y+1, r25	; 0x01
+    799c:	9b e2       	ldi	r25, 0x2B	; 43
+    799e:	9a 83       	std	Y+2, r25	; 0x02
+    79a0:	8b 83       	std	Y+3, r24	; 0x03
+    79a2:	43 e0       	ldi	r20, 0x03	; 3
+    79a4:	50 e0       	ldi	r21, 0x00	; 0
+    79a6:	be 01       	movw	r22, r28
+    79a8:	6f 5f       	subi	r22, 0xFF	; 255
+    79aa:	7f 4f       	sbci	r23, 0xFF	; 255
+    79ac:	8b e7       	ldi	r24, 0x7B	; 123
+    79ae:	90 e0       	ldi	r25, 0x00	; 0
+    79b0:	0e 94 18 39 	call	0x7230	; 0x7230 <HAL_SPI_Transmit>
+    79b4:	0f 90       	pop	r0
+    79b6:	0f 90       	pop	r0
+    79b8:	0f 90       	pop	r0
+    79ba:	df 91       	pop	r29
+    79bc:	cf 91       	pop	r28
+    79be:	08 95       	ret
 
-00007982 <MCP2515_init>:
-    7982:	e9 e7       	ldi	r30, 0x79	; 121
-    7984:	f0 e0       	ldi	r31, 0x00	; 0
-    7986:	81 e0       	ldi	r24, 0x01	; 1
-    7988:	80 83       	st	Z, r24
-    798a:	11 82       	std	Z+1, r1	; 0x01
-    798c:	eb e7       	ldi	r30, 0x7B	; 123
-    798e:	f0 e0       	ldi	r31, 0x00	; 0
-    7990:	80 e1       	ldi	r24, 0x10	; 16
-    7992:	80 83       	st	Z, r24
-    7994:	84 e1       	ldi	r24, 0x14	; 20
-    7996:	83 83       	std	Z+3, r24	; 0x03
-    7998:	cf 01       	movw	r24, r30
-    799a:	0e 94 b6 38 	call	0x716c	; 0x716c <HAL_SPI_Init>
-    799e:	0e 94 53 3b 	call	0x76a6	; 0x76a6 <MCP2515_Rest>
-    79a2:	83 e0       	ldi	r24, 0x03	; 3
-    79a4:	0e 94 a7 3c 	call	0x794e	; 0x794e <MCP2515_Enable_Interrupt>
-    79a8:	80 e8       	ldi	r24, 0x80	; 128
-    79aa:	0e 94 83 3b 	call	0x7706	; 0x7706 <MCP2515_Set_OperMode>
-    79ae:	47 e8       	ldi	r20, 0x87	; 135
-    79b0:	6a ef       	ldi	r22, 0xFA	; 250
-    79b2:	83 e0       	ldi	r24, 0x03	; 3
-    79b4:	0e 94 70 3b 	call	0x76e0	; 0x76e0 <MCP2515_SetBitTiming>
-    79b8:	21 e0       	ldi	r18, 0x01	; 1
-    79ba:	40 e0       	ldi	r20, 0x00	; 0
-    79bc:	50 e0       	ldi	r21, 0x00	; 0
-    79be:	ba 01       	movw	r22, r20
-    79c0:	80 e0       	ldi	r24, 0x00	; 0
-    79c2:	0e 94 15 3c 	call	0x782a	; 0x782a <MCP2515_SetFilter>
-    79c6:	21 e0       	ldi	r18, 0x01	; 1
-    79c8:	40 e0       	ldi	r20, 0x00	; 0
-    79ca:	50 e0       	ldi	r21, 0x00	; 0
-    79cc:	ba 01       	movw	r22, r20
-    79ce:	80 e0       	ldi	r24, 0x00	; 0
-    79d0:	0e 94 9d 3b 	call	0x773a	; 0x773a <MCP2515_SetMask>
-    79d4:	67 e0       	ldi	r22, 0x07	; 7
-    79d6:	8d e0       	ldi	r24, 0x0D	; 13
-    79d8:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
-    79dc:	80 e0       	ldi	r24, 0x00	; 0
-    79de:	0e 94 83 3b 	call	0x7706	; 0x7706 <MCP2515_Set_OperMode>
-    79e2:	89 e7       	ldi	r24, 0x79	; 121
-    79e4:	90 e0       	ldi	r25, 0x00	; 0
-    79e6:	0e 94 49 38 	call	0x7092	; 0x7092 <EXTI_Init>
-    79ea:	08 95       	ret
+000079c0 <MCP2515_init>:
+    79c0:	e9 e7       	ldi	r30, 0x79	; 121
+    79c2:	f0 e0       	ldi	r31, 0x00	; 0
+    79c4:	81 e0       	ldi	r24, 0x01	; 1
+    79c6:	80 83       	st	Z, r24
+    79c8:	11 82       	std	Z+1, r1	; 0x01
+    79ca:	eb e7       	ldi	r30, 0x7B	; 123
+    79cc:	f0 e0       	ldi	r31, 0x00	; 0
+    79ce:	80 e1       	ldi	r24, 0x10	; 16
+    79d0:	80 83       	st	Z, r24
+    79d2:	84 e1       	ldi	r24, 0x14	; 20
+    79d4:	83 83       	std	Z+3, r24	; 0x03
+    79d6:	cf 01       	movw	r24, r30
+    79d8:	0e 94 b6 38 	call	0x716c	; 0x716c <HAL_SPI_Init>
+    79dc:	0e 94 72 3b 	call	0x76e4	; 0x76e4 <MCP2515_Rest>
+    79e0:	83 e0       	ldi	r24, 0x03	; 3
+    79e2:	0e 94 c6 3c 	call	0x798c	; 0x798c <MCP2515_Enable_Interrupt>
+    79e6:	80 e8       	ldi	r24, 0x80	; 128
+    79e8:	0e 94 a2 3b 	call	0x7744	; 0x7744 <MCP2515_Set_OperMode>
+    79ec:	47 e8       	ldi	r20, 0x87	; 135
+    79ee:	6a ef       	ldi	r22, 0xFA	; 250
+    79f0:	83 e0       	ldi	r24, 0x03	; 3
+    79f2:	0e 94 8f 3b 	call	0x771e	; 0x771e <MCP2515_SetBitTiming>
+    79f6:	21 e0       	ldi	r18, 0x01	; 1
+    79f8:	40 e0       	ldi	r20, 0x00	; 0
+    79fa:	50 e0       	ldi	r21, 0x00	; 0
+    79fc:	ba 01       	movw	r22, r20
+    79fe:	80 e0       	ldi	r24, 0x00	; 0
+    7a00:	0e 94 34 3c 	call	0x7868	; 0x7868 <MCP2515_SetFilter>
+    7a04:	21 e0       	ldi	r18, 0x01	; 1
+    7a06:	40 e0       	ldi	r20, 0x00	; 0
+    7a08:	50 e0       	ldi	r21, 0x00	; 0
+    7a0a:	ba 01       	movw	r22, r20
+    7a0c:	80 e0       	ldi	r24, 0x00	; 0
+    7a0e:	0e 94 bc 3b 	call	0x7778	; 0x7778 <MCP2515_SetMask>
+    7a12:	67 e0       	ldi	r22, 0x07	; 7
+    7a14:	8d e0       	ldi	r24, 0x0D	; 13
+    7a16:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
+    7a1a:	80 e0       	ldi	r24, 0x00	; 0
+    7a1c:	0e 94 a2 3b 	call	0x7744	; 0x7744 <MCP2515_Set_OperMode>
+    7a20:	89 e7       	ldi	r24, 0x79	; 121
+    7a22:	90 e0       	ldi	r25, 0x00	; 0
+    7a24:	0e 94 49 38 	call	0x7092	; 0x7092 <EXTI_Init>
+    7a28:	08 95       	ret
 
-000079ec <MCP2515_receiveMesg>:
+00007a2a <MCP2515_receiveMesg>:
  * param : RecievedMesg pointer to struct that will hold all receive message information 
  * return : bool if false means their is no pending message to read   
  */
 
 PUBLIC bool MCP2515_receiveMesg(CANMesg_t * RecievedMesg)
 {
-    79ec:	ef 92       	push	r14
-    79ee:	ff 92       	push	r15
-    79f0:	0f 93       	push	r16
-    79f2:	1f 93       	push	r17
-    79f4:	cf 93       	push	r28
-    79f6:	df 93       	push	r29
-    79f8:	7c 01       	movw	r14, r24
+    7a2a:	ef 92       	push	r14
+    7a2c:	ff 92       	push	r15
+    7a2e:	0f 93       	push	r16
+    7a30:	1f 93       	push	r17
+    7a32:	cf 93       	push	r28
+    7a34:	df 93       	push	r29
+    7a36:	7c 01       	movw	r14, r24
 	uint8_t CANReaddata =0,MAilBoxNum =0,iterator=0 ;
 	CANReaddata = MCP2515_Read_Register(CANINTF);
-    79fa:	8c e2       	ldi	r24, 0x2C	; 44
-    79fc:	0e 94 1f 3b 	call	0x763e	; 0x763e <MCP2515_Read_Register>
+    7a38:	8c e2       	ldi	r24, 0x2C	; 44
+    7a3a:	0e 94 3e 3b 	call	0x767c	; 0x767c <MCP2515_Read_Register>
 	if((CANReaddata & 0x01))
-    7a00:	80 fd       	sbrc	r24, 0
-    7a02:	04 c0       	rjmp	.+8      	; 0x7a0c <MCP2515_receiveMesg+0x20>
+    7a3e:	80 fd       	sbrc	r24, 0
+    7a40:	04 c0       	rjmp	.+8      	; 0x7a4a <MCP2515_receiveMesg+0x20>
 	{
 		MAilBoxNum = 0 ;
 	}
 	else if((CANReaddata & 0x02)) /* means there is message is in Mailbox1 */
-    7a04:	81 ff       	sbrs	r24, 1
-    7a06:	5b c0       	rjmp	.+182    	; 0x7abe <MCP2515_receiveMesg+0xd2>
+    7a42:	81 ff       	sbrs	r24, 1
+    7a44:	5b c0       	rjmp	.+182    	; 0x7afc <MCP2515_receiveMesg+0xd2>
 	{
 		MAilBoxNum = 1 ;
-    7a08:	d1 e0       	ldi	r29, 0x01	; 1
-    7a0a:	01 c0       	rjmp	.+2      	; 0x7a0e <MCP2515_receiveMesg+0x22>
+    7a46:	d1 e0       	ldi	r29, 0x01	; 1
+    7a48:	01 c0       	rjmp	.+2      	; 0x7a4c <MCP2515_receiveMesg+0x22>
 {
 	uint8_t CANReaddata =0,MAilBoxNum =0,iterator=0 ;
 	CANReaddata = MCP2515_Read_Register(CANINTF);
 	if((CANReaddata & 0x01))
 	{
 		MAilBoxNum = 0 ;
-    7a0c:	d0 e0       	ldi	r29, 0x00	; 0
+    7a4a:	d0 e0       	ldi	r29, 0x00	; 0
 	}
 	else{
 		return 0 ;
 	}
 
 	CANReaddata = MCP2515_Read_Register(CANSTAT);
-    7a0e:	8e e0       	ldi	r24, 0x0E	; 14
-    7a10:	0e 94 1f 3b 	call	0x763e	; 0x763e <MCP2515_Read_Register>
+    7a4c:	8e e0       	ldi	r24, 0x0E	; 14
+    7a4e:	0e 94 3e 3b 	call	0x767c	; 0x767c <MCP2515_Read_Register>
 	RecievedMesg->CANControl.RTR_Field = (CANReaddata & 0x40)>>6 ;
-    7a14:	80 74       	andi	r24, 0x40	; 64
-    7a16:	90 e0       	ldi	r25, 0x00	; 0
-    7a18:	08 2e       	mov	r0, r24
-    7a1a:	89 2f       	mov	r24, r25
-    7a1c:	00 0c       	add	r0, r0
-    7a1e:	88 1f       	adc	r24, r24
-    7a20:	99 0b       	sbc	r25, r25
-    7a22:	00 0c       	add	r0, r0
-    7a24:	88 1f       	adc	r24, r24
-    7a26:	99 1f       	adc	r25, r25
-    7a28:	f7 01       	movw	r30, r14
-    7a2a:	94 81       	ldd	r25, Z+4	; 0x04
-    7a2c:	80 fb       	bst	r24, 0
-    7a2e:	95 f9       	bld	r25, 5
-    7a30:	94 83       	std	Z+4, r25	; 0x04
+    7a52:	80 74       	andi	r24, 0x40	; 64
+    7a54:	90 e0       	ldi	r25, 0x00	; 0
+    7a56:	08 2e       	mov	r0, r24
+    7a58:	89 2f       	mov	r24, r25
+    7a5a:	00 0c       	add	r0, r0
+    7a5c:	88 1f       	adc	r24, r24
+    7a5e:	99 0b       	sbc	r25, r25
+    7a60:	00 0c       	add	r0, r0
+    7a62:	88 1f       	adc	r24, r24
+    7a64:	99 1f       	adc	r25, r25
+    7a66:	f7 01       	movw	r30, r14
+    7a68:	94 81       	ldd	r25, Z+4	; 0x04
+    7a6a:	80 fb       	bst	r24, 0
+    7a6c:	95 f9       	bld	r25, 5
+    7a6e:	94 83       	std	Z+4, r25	; 0x04
 	CANReaddata = MCP2515_Read_Register(RXBnSIDL(MAilBoxNum));
-    7a32:	d2 95       	swap	r29
-    7a34:	d0 7f       	andi	r29, 0xF0	; 240
-    7a36:	82 e6       	ldi	r24, 0x62	; 98
-    7a38:	8d 0f       	add	r24, r29
-    7a3a:	0e 94 1f 3b 	call	0x763e	; 0x763e <MCP2515_Read_Register>
-    7a3e:	c8 2f       	mov	r28, r24
+    7a70:	d2 95       	swap	r29
+    7a72:	d0 7f       	andi	r29, 0xF0	; 240
+    7a74:	82 e6       	ldi	r24, 0x62	; 98
+    7a76:	8d 0f       	add	r24, r29
+    7a78:	0e 94 3e 3b 	call	0x767c	; 0x767c <MCP2515_Read_Register>
+    7a7c:	c8 2f       	mov	r28, r24
 	RecievedMesg->CANControl.EXT_Field = (CANReaddata & 0x08 )>>3 ;
-    7a40:	88 70       	andi	r24, 0x08	; 8
-    7a42:	90 e0       	ldi	r25, 0x00	; 0
-    7a44:	95 95       	asr	r25
-    7a46:	87 95       	ror	r24
-    7a48:	95 95       	asr	r25
-    7a4a:	87 95       	ror	r24
-    7a4c:	95 95       	asr	r25
-    7a4e:	87 95       	ror	r24
-    7a50:	f7 01       	movw	r30, r14
-    7a52:	94 81       	ldd	r25, Z+4	; 0x04
-    7a54:	80 fb       	bst	r24, 0
-    7a56:	94 f9       	bld	r25, 4
-    7a58:	94 83       	std	Z+4, r25	; 0x04
+    7a7e:	88 70       	andi	r24, 0x08	; 8
+    7a80:	90 e0       	ldi	r25, 0x00	; 0
+    7a82:	95 95       	asr	r25
+    7a84:	87 95       	ror	r24
+    7a86:	95 95       	asr	r25
+    7a88:	87 95       	ror	r24
+    7a8a:	95 95       	asr	r25
+    7a8c:	87 95       	ror	r24
+    7a8e:	f7 01       	movw	r30, r14
+    7a90:	94 81       	ldd	r25, Z+4	; 0x04
+    7a92:	80 fb       	bst	r24, 0
+    7a94:	94 f9       	bld	r25, 4
+    7a96:	94 83       	std	Z+4, r25	; 0x04
 	RecievedMesg->ID  = MCP2515_Read_Register(RXBnSIDH(MAilBoxNum));
-    7a5a:	81 e6       	ldi	r24, 0x61	; 97
-    7a5c:	8d 0f       	add	r24, r29
-    7a5e:	0e 94 1f 3b 	call	0x763e	; 0x763e <MCP2515_Read_Register>
-    7a62:	90 e0       	ldi	r25, 0x00	; 0
-    7a64:	a0 e0       	ldi	r26, 0x00	; 0
-    7a66:	b0 e0       	ldi	r27, 0x00	; 0
+    7a98:	81 e6       	ldi	r24, 0x61	; 97
+    7a9a:	8d 0f       	add	r24, r29
+    7a9c:	0e 94 3e 3b 	call	0x767c	; 0x767c <MCP2515_Read_Register>
+    7aa0:	90 e0       	ldi	r25, 0x00	; 0
+    7aa2:	a0 e0       	ldi	r26, 0x00	; 0
+    7aa4:	b0 e0       	ldi	r27, 0x00	; 0
 	RecievedMesg->ID  = (((uint32_t)RecievedMesg->ID<<3)|(CANReaddata>>5));
-    7a68:	88 0f       	add	r24, r24
-    7a6a:	99 1f       	adc	r25, r25
-    7a6c:	aa 1f       	adc	r26, r26
-    7a6e:	bb 1f       	adc	r27, r27
-    7a70:	88 0f       	add	r24, r24
-    7a72:	99 1f       	adc	r25, r25
-    7a74:	aa 1f       	adc	r26, r26
-    7a76:	bb 1f       	adc	r27, r27
-    7a78:	88 0f       	add	r24, r24
-    7a7a:	99 1f       	adc	r25, r25
-    7a7c:	aa 1f       	adc	r26, r26
-    7a7e:	bb 1f       	adc	r27, r27
-    7a80:	c2 95       	swap	r28
-    7a82:	c6 95       	lsr	r28
-    7a84:	c7 70       	andi	r28, 0x07	; 7
-    7a86:	8c 2b       	or	r24, r28
-    7a88:	f7 01       	movw	r30, r14
-    7a8a:	80 83       	st	Z, r24
-    7a8c:	91 83       	std	Z+1, r25	; 0x01
-    7a8e:	a2 83       	std	Z+2, r26	; 0x02
-    7a90:	b3 83       	std	Z+3, r27	; 0x03
+    7aa6:	88 0f       	add	r24, r24
+    7aa8:	99 1f       	adc	r25, r25
+    7aaa:	aa 1f       	adc	r26, r26
+    7aac:	bb 1f       	adc	r27, r27
+    7aae:	88 0f       	add	r24, r24
+    7ab0:	99 1f       	adc	r25, r25
+    7ab2:	aa 1f       	adc	r26, r26
+    7ab4:	bb 1f       	adc	r27, r27
+    7ab6:	88 0f       	add	r24, r24
+    7ab8:	99 1f       	adc	r25, r25
+    7aba:	aa 1f       	adc	r26, r26
+    7abc:	bb 1f       	adc	r27, r27
+    7abe:	c2 95       	swap	r28
+    7ac0:	c6 95       	lsr	r28
+    7ac2:	c7 70       	andi	r28, 0x07	; 7
+    7ac4:	8c 2b       	or	r24, r28
+    7ac6:	f7 01       	movw	r30, r14
+    7ac8:	80 83       	st	Z, r24
+    7aca:	91 83       	std	Z+1, r25	; 0x01
+    7acc:	a2 83       	std	Z+2, r26	; 0x02
+    7ace:	b3 83       	std	Z+3, r27	; 0x03
  * return : bool if false means their is no pending message to read   
  */
 
 PUBLIC bool MCP2515_receiveMesg(CANMesg_t * RecievedMesg)
 {
 	uint8_t CANReaddata =0,MAilBoxNum =0,iterator=0 ;
-    7a92:	c0 e0       	ldi	r28, 0x00	; 0
+    7ad0:	c0 e0       	ldi	r28, 0x00	; 0
 	RecievedMesg->CANControl.EXT_Field = (CANReaddata & 0x08 )>>3 ;
 	RecievedMesg->ID  = MCP2515_Read_Register(RXBnSIDH(MAilBoxNum));
 	RecievedMesg->ID  = (((uint32_t)RecievedMesg->ID<<3)|(CANReaddata>>5));
 	
 	
 	while(iterator != 8)
-    7a94:	0c c0       	rjmp	.+24     	; 0x7aae <MCP2515_receiveMesg+0xc2>
+    7ad2:	0c c0       	rjmp	.+24     	; 0x7aec <MCP2515_receiveMesg+0xc2>
 	{
 		RecievedMesg->MesgData[iterator] = MCP2515_Read_Register(RXBnDm(MAilBoxNum,iterator));
-    7a96:	0c 2f       	mov	r16, r28
-    7a98:	10 e0       	ldi	r17, 0x00	; 0
-    7a9a:	8c 2f       	mov	r24, r28
-    7a9c:	8d 0f       	add	r24, r29
-    7a9e:	8a 59       	subi	r24, 0x9A	; 154
-    7aa0:	0e 94 1f 3b 	call	0x763e	; 0x763e <MCP2515_Read_Register>
-    7aa4:	f7 01       	movw	r30, r14
-    7aa6:	e0 0f       	add	r30, r16
-    7aa8:	f1 1f       	adc	r31, r17
-    7aaa:	85 83       	std	Z+5, r24	; 0x05
+    7ad4:	0c 2f       	mov	r16, r28
+    7ad6:	10 e0       	ldi	r17, 0x00	; 0
+    7ad8:	8c 2f       	mov	r24, r28
+    7ada:	8d 0f       	add	r24, r29
+    7adc:	8a 59       	subi	r24, 0x9A	; 154
+    7ade:	0e 94 3e 3b 	call	0x767c	; 0x767c <MCP2515_Read_Register>
+    7ae2:	f7 01       	movw	r30, r14
+    7ae4:	e0 0f       	add	r30, r16
+    7ae6:	f1 1f       	adc	r31, r17
+    7ae8:	85 83       	std	Z+5, r24	; 0x05
 		iterator++;
-    7aac:	cf 5f       	subi	r28, 0xFF	; 255
+    7aea:	cf 5f       	subi	r28, 0xFF	; 255
 	RecievedMesg->CANControl.EXT_Field = (CANReaddata & 0x08 )>>3 ;
 	RecievedMesg->ID  = MCP2515_Read_Register(RXBnSIDH(MAilBoxNum));
 	RecievedMesg->ID  = (((uint32_t)RecievedMesg->ID<<3)|(CANReaddata>>5));
 	
 	
 	while(iterator != 8)
-    7aae:	c8 30       	cpi	r28, 0x08	; 8
-    7ab0:	91 f7       	brne	.-28     	; 0x7a96 <MCP2515_receiveMesg+0xaa>
+    7aec:	c8 30       	cpi	r28, 0x08	; 8
+    7aee:	91 f7       	brne	.-28     	; 0x7ad4 <MCP2515_receiveMesg+0xaa>
 	{
 		RecievedMesg->MesgData[iterator] = MCP2515_Read_Register(RXBnDm(MAilBoxNum,iterator));
 		iterator++;
 	}
 
 	MCP2515_Write_Register(CANINTF , 0x00 ); /* FIRST CLESR FLAG */
-    7ab2:	60 e0       	ldi	r22, 0x00	; 0
-    7ab4:	8c e2       	ldi	r24, 0x2C	; 44
-    7ab6:	0e 94 3a 3b 	call	0x7674	; 0x7674 <MCP2515_Write_Register>
+    7af0:	60 e0       	ldi	r22, 0x00	; 0
+    7af2:	8c e2       	ldi	r24, 0x2C	; 44
+    7af4:	0e 94 59 3b 	call	0x76b2	; 0x76b2 <MCP2515_Write_Register>
 	return true ;
-    7aba:	81 e0       	ldi	r24, 0x01	; 1
-    7abc:	01 c0       	rjmp	.+2      	; 0x7ac0 <MCP2515_receiveMesg+0xd4>
+    7af8:	81 e0       	ldi	r24, 0x01	; 1
+    7afa:	01 c0       	rjmp	.+2      	; 0x7afe <MCP2515_receiveMesg+0xd4>
 	else if((CANReaddata & 0x02)) /* means there is message is in Mailbox1 */
 	{
 		MAilBoxNum = 1 ;
 	}
 	else{
 		return 0 ;
-    7abe:	80 e0       	ldi	r24, 0x00	; 0
+    7afc:	80 e0       	ldi	r24, 0x00	; 0
 		iterator++;
 	}
 
 	MCP2515_Write_Register(CANINTF , 0x00 ); /* FIRST CLESR FLAG */
 	return true ;
-    7ac0:	df 91       	pop	r29
-    7ac2:	cf 91       	pop	r28
-    7ac4:	1f 91       	pop	r17
-    7ac6:	0f 91       	pop	r16
-    7ac8:	ff 90       	pop	r15
-    7aca:	ef 90       	pop	r14
-    7acc:	08 95       	ret
+    7afe:	df 91       	pop	r29
+    7b00:	cf 91       	pop	r28
+    7b02:	1f 91       	pop	r17
+    7b04:	0f 91       	pop	r16
+    7b06:	ff 90       	pop	r15
+    7b08:	ef 90       	pop	r14
+    7b0a:	08 95       	ret
 
-00007ace <itoa>:
-    7ace:	45 32       	cpi	r20, 0x25	; 37
-    7ad0:	51 05       	cpc	r21, r1
-    7ad2:	20 f4       	brcc	.+8      	; 0x7adc <itoa+0xe>
-    7ad4:	42 30       	cpi	r20, 0x02	; 2
-    7ad6:	10 f0       	brcs	.+4      	; 0x7adc <itoa+0xe>
-    7ad8:	0c 94 72 3d 	jmp	0x7ae4	; 0x7ae4 <__itoa_ncheck>
-    7adc:	fb 01       	movw	r30, r22
-    7ade:	10 82       	st	Z, r1
-    7ae0:	cb 01       	movw	r24, r22
-    7ae2:	08 95       	ret
+00007b0c <itoa>:
+    7b0c:	45 32       	cpi	r20, 0x25	; 37
+    7b0e:	51 05       	cpc	r21, r1
+    7b10:	20 f4       	brcc	.+8      	; 0x7b1a <itoa+0xe>
+    7b12:	42 30       	cpi	r20, 0x02	; 2
+    7b14:	10 f0       	brcs	.+4      	; 0x7b1a <itoa+0xe>
+    7b16:	0c 94 91 3d 	jmp	0x7b22	; 0x7b22 <__itoa_ncheck>
+    7b1a:	fb 01       	movw	r30, r22
+    7b1c:	10 82       	st	Z, r1
+    7b1e:	cb 01       	movw	r24, r22
+    7b20:	08 95       	ret
 
-00007ae4 <__itoa_ncheck>:
-    7ae4:	bb 27       	eor	r27, r27
-    7ae6:	4a 30       	cpi	r20, 0x0A	; 10
-    7ae8:	31 f4       	brne	.+12     	; 0x7af6 <__itoa_ncheck+0x12>
-    7aea:	99 23       	and	r25, r25
-    7aec:	22 f4       	brpl	.+8      	; 0x7af6 <__itoa_ncheck+0x12>
-    7aee:	bd e2       	ldi	r27, 0x2D	; 45
-    7af0:	90 95       	com	r25
-    7af2:	81 95       	neg	r24
-    7af4:	9f 4f       	sbci	r25, 0xFF	; 255
-    7af6:	0c 94 7e 3d 	jmp	0x7afc	; 0x7afc <__utoa_common>
+00007b22 <__itoa_ncheck>:
+    7b22:	bb 27       	eor	r27, r27
+    7b24:	4a 30       	cpi	r20, 0x0A	; 10
+    7b26:	31 f4       	brne	.+12     	; 0x7b34 <__itoa_ncheck+0x12>
+    7b28:	99 23       	and	r25, r25
+    7b2a:	22 f4       	brpl	.+8      	; 0x7b34 <__itoa_ncheck+0x12>
+    7b2c:	bd e2       	ldi	r27, 0x2D	; 45
+    7b2e:	90 95       	com	r25
+    7b30:	81 95       	neg	r24
+    7b32:	9f 4f       	sbci	r25, 0xFF	; 255
+    7b34:	0c 94 9d 3d 	jmp	0x7b3a	; 0x7b3a <__utoa_common>
 
-00007afa <__utoa_ncheck>:
-    7afa:	bb 27       	eor	r27, r27
+00007b38 <__utoa_ncheck>:
+    7b38:	bb 27       	eor	r27, r27
 
-00007afc <__utoa_common>:
-    7afc:	fb 01       	movw	r30, r22
-    7afe:	55 27       	eor	r21, r21
-    7b00:	aa 27       	eor	r26, r26
-    7b02:	88 0f       	add	r24, r24
-    7b04:	99 1f       	adc	r25, r25
-    7b06:	aa 1f       	adc	r26, r26
-    7b08:	a4 17       	cp	r26, r20
-    7b0a:	10 f0       	brcs	.+4      	; 0x7b10 <__utoa_common+0x14>
-    7b0c:	a4 1b       	sub	r26, r20
-    7b0e:	83 95       	inc	r24
-    7b10:	50 51       	subi	r21, 0x10	; 16
-    7b12:	b9 f7       	brne	.-18     	; 0x7b02 <__utoa_common+0x6>
-    7b14:	a0 5d       	subi	r26, 0xD0	; 208
-    7b16:	aa 33       	cpi	r26, 0x3A	; 58
-    7b18:	08 f0       	brcs	.+2      	; 0x7b1c <__utoa_common+0x20>
-    7b1a:	a9 5d       	subi	r26, 0xD9	; 217
-    7b1c:	a1 93       	st	Z+, r26
-    7b1e:	00 97       	sbiw	r24, 0x00	; 0
-    7b20:	79 f7       	brne	.-34     	; 0x7b00 <__utoa_common+0x4>
-    7b22:	b1 11       	cpse	r27, r1
-    7b24:	b1 93       	st	Z+, r27
-    7b26:	11 92       	st	Z+, r1
-    7b28:	cb 01       	movw	r24, r22
-    7b2a:	0c 94 97 3d 	jmp	0x7b2e	; 0x7b2e <strrev>
+00007b3a <__utoa_common>:
+    7b3a:	fb 01       	movw	r30, r22
+    7b3c:	55 27       	eor	r21, r21
+    7b3e:	aa 27       	eor	r26, r26
+    7b40:	88 0f       	add	r24, r24
+    7b42:	99 1f       	adc	r25, r25
+    7b44:	aa 1f       	adc	r26, r26
+    7b46:	a4 17       	cp	r26, r20
+    7b48:	10 f0       	brcs	.+4      	; 0x7b4e <__utoa_common+0x14>
+    7b4a:	a4 1b       	sub	r26, r20
+    7b4c:	83 95       	inc	r24
+    7b4e:	50 51       	subi	r21, 0x10	; 16
+    7b50:	b9 f7       	brne	.-18     	; 0x7b40 <__utoa_common+0x6>
+    7b52:	a0 5d       	subi	r26, 0xD0	; 208
+    7b54:	aa 33       	cpi	r26, 0x3A	; 58
+    7b56:	08 f0       	brcs	.+2      	; 0x7b5a <__utoa_common+0x20>
+    7b58:	a9 5d       	subi	r26, 0xD9	; 217
+    7b5a:	a1 93       	st	Z+, r26
+    7b5c:	00 97       	sbiw	r24, 0x00	; 0
+    7b5e:	79 f7       	brne	.-34     	; 0x7b3e <__utoa_common+0x4>
+    7b60:	b1 11       	cpse	r27, r1
+    7b62:	b1 93       	st	Z+, r27
+    7b64:	11 92       	st	Z+, r1
+    7b66:	cb 01       	movw	r24, r22
+    7b68:	0c 94 b6 3d 	jmp	0x7b6c	; 0x7b6c <strrev>
 
-00007b2e <strrev>:
-    7b2e:	dc 01       	movw	r26, r24
-    7b30:	fc 01       	movw	r30, r24
-    7b32:	67 2f       	mov	r22, r23
-    7b34:	71 91       	ld	r23, Z+
-    7b36:	77 23       	and	r23, r23
-    7b38:	e1 f7       	brne	.-8      	; 0x7b32 <strrev+0x4>
-    7b3a:	32 97       	sbiw	r30, 0x02	; 2
-    7b3c:	04 c0       	rjmp	.+8      	; 0x7b46 <strrev+0x18>
-    7b3e:	7c 91       	ld	r23, X
-    7b40:	6d 93       	st	X+, r22
-    7b42:	70 83       	st	Z, r23
-    7b44:	62 91       	ld	r22, -Z
-    7b46:	ae 17       	cp	r26, r30
-    7b48:	bf 07       	cpc	r27, r31
-    7b4a:	c8 f3       	brcs	.-14     	; 0x7b3e <strrev+0x10>
-    7b4c:	08 95       	ret
+00007b6c <strrev>:
+    7b6c:	dc 01       	movw	r26, r24
+    7b6e:	fc 01       	movw	r30, r24
+    7b70:	67 2f       	mov	r22, r23
+    7b72:	71 91       	ld	r23, Z+
+    7b74:	77 23       	and	r23, r23
+    7b76:	e1 f7       	brne	.-8      	; 0x7b70 <strrev+0x4>
+    7b78:	32 97       	sbiw	r30, 0x02	; 2
+    7b7a:	04 c0       	rjmp	.+8      	; 0x7b84 <strrev+0x18>
+    7b7c:	7c 91       	ld	r23, X
+    7b7e:	6d 93       	st	X+, r22
+    7b80:	70 83       	st	Z, r23
+    7b82:	62 91       	ld	r22, -Z
+    7b84:	ae 17       	cp	r26, r30
+    7b86:	bf 07       	cpc	r27, r31
+    7b88:	c8 f3       	brcs	.-14     	; 0x7b7c <strrev+0x10>
+    7b8a:	08 95       	ret
 
-00007b4e <eeprom_read_byte>:
-    7b4e:	e1 99       	sbic	0x1c, 1	; 28
-    7b50:	fe cf       	rjmp	.-4      	; 0x7b4e <eeprom_read_byte>
-    7b52:	9f bb       	out	0x1f, r25	; 31
-    7b54:	8e bb       	out	0x1e, r24	; 30
-    7b56:	e0 9a       	sbi	0x1c, 0	; 28
-    7b58:	99 27       	eor	r25, r25
-    7b5a:	8d b3       	in	r24, 0x1d	; 29
-    7b5c:	08 95       	ret
+00007b8c <eeprom_read_byte>:
+    7b8c:	e1 99       	sbic	0x1c, 1	; 28
+    7b8e:	fe cf       	rjmp	.-4      	; 0x7b8c <eeprom_read_byte>
+    7b90:	9f bb       	out	0x1f, r25	; 31
+    7b92:	8e bb       	out	0x1e, r24	; 30
+    7b94:	e0 9a       	sbi	0x1c, 0	; 28
+    7b96:	99 27       	eor	r25, r25
+    7b98:	8d b3       	in	r24, 0x1d	; 29
+    7b9a:	08 95       	ret
 
-00007b5e <_exit>:
-    7b5e:	f8 94       	cli
+00007b9c <eeprom_write_block>:
+    7b9c:	dc 01       	movw	r26, r24
+    7b9e:	cb 01       	movw	r24, r22
+    7ba0:	03 c0       	rjmp	.+6      	; 0x7ba8 <eeprom_write_block+0xc>
+    7ba2:	2d 91       	ld	r18, X+
+    7ba4:	0e 94 d9 3d 	call	0x7bb2	; 0x7bb2 <eeprom_write_r18>
+    7ba8:	41 50       	subi	r20, 0x01	; 1
+    7baa:	50 40       	sbci	r21, 0x00	; 0
+    7bac:	d0 f7       	brcc	.-12     	; 0x7ba2 <eeprom_write_block+0x6>
+    7bae:	08 95       	ret
 
-00007b60 <__stop_program>:
-    7b60:	ff cf       	rjmp	.-2      	; 0x7b60 <__stop_program>
+00007bb0 <eeprom_write_byte>:
+    7bb0:	26 2f       	mov	r18, r22
+
+00007bb2 <eeprom_write_r18>:
+    7bb2:	e1 99       	sbic	0x1c, 1	; 28
+    7bb4:	fe cf       	rjmp	.-4      	; 0x7bb2 <eeprom_write_r18>
+    7bb6:	9f bb       	out	0x1f, r25	; 31
+    7bb8:	8e bb       	out	0x1e, r24	; 30
+    7bba:	2d bb       	out	0x1d, r18	; 29
+    7bbc:	0f b6       	in	r0, 0x3f	; 63
+    7bbe:	f8 94       	cli
+    7bc0:	e2 9a       	sbi	0x1c, 2	; 28
+    7bc2:	e1 9a       	sbi	0x1c, 1	; 28
+    7bc4:	0f be       	out	0x3f, r0	; 63
+    7bc6:	01 96       	adiw	r24, 0x01	; 1
+    7bc8:	08 95       	ret
+
+00007bca <_exit>:
+    7bca:	f8 94       	cli
+
+00007bcc <__stop_program>:
+    7bcc:	ff cf       	rjmp	.-2      	; 0x7bcc <__stop_program>

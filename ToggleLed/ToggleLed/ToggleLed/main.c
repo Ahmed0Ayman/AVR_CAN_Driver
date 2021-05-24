@@ -15,7 +15,11 @@ int main(void)
     while (1) 
     {
 
-
+	/* vector table relocated to bootloader section */
+	GICR = 1 << IVCE ;
+	GICR = 0 ;
+	
+	
 					PORTD |= 0x80 ;
 					_delay_ms(200);
 					PORTD &= ~(0x80);
