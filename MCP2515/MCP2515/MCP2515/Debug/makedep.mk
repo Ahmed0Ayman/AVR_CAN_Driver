@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Boot.c
+
 HAL_EXIT.c
 
 HAL_GPIO.c
